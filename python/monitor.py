@@ -6,6 +6,7 @@ import sqlite3
 import firebirdsql
 import configparser
 from funcoes import proximoNumero
+from funcoes import trataData
 
 
 config = configparser.RawConfigParser()

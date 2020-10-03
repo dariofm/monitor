@@ -10,3 +10,16 @@ def proximoNumero(GENERETOR):
   for i in cursor.fetchall():
       idAtual = i[0]
   return idAtual
+  
+  
+def trataData(dataMongo):
+    
+    old = str(dataMongo)
+    
+    dia = old[8:10]
+    mes = old[5:7]
+    ano = old[0:4]
+
+    return dia+'/'+mes+'/'+ano
+    
+  
