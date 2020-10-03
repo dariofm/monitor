@@ -87,11 +87,11 @@ while ativo == True:
             total = i[3] * i[4]
             canc = i[5]
             impresso = 0
-            #try:
-            cursor.execute("insert into NOTA_MANUAL(id,numero,item,emissao,codigointerno,descricao,und,qtd,valor_unitario, valor_total,caixa,impresso) values (%s,%s,%s,%s,%s,%s,%s,%d,%d,%d,%s,%s) "%(idCodigo,ultimo_numero,item,emissao,codigoInterno,descricao,unidade,quantidade,valor_unitario,total,caixa,impresso))
-            conexao.commit()
-            #except:
-            #    f.write(str(retornaProdutos(ultimo_numero)))
+            try:
+                cursor.execute("insert into NOTA_MANUAL(id,numero,item,emissao,codigointerno,descricao,und,qtd,valor_unitario, valor_total,caixa,impresso) values (%s,%s,%s,%s,%s,%s,%s,%d,%d,%d,%s,%s) "%(idCodigo,ultimo_numero,item,emissao,codigoInterno,descricao,unidade,quantidade,valor_unitario,total,caixa,impresso))
+                conexao.commit()
+            except:
+                f.write(str(retornaProdutos(ultimo_numero)))
         f.close()
         #Atualiza último cupom gravado
         cursor.execute('update param set controle = %s'%(ultimo_numero))
