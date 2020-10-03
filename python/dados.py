@@ -33,7 +33,8 @@ for i in emitente.find({"_t.2":"Emitente"}):
     cep = endereco = "'"+i["Carteira"]["EnderecoPrincipal"]["Cep"]+"'"
     cidade = endereco = "'"+i["Carteira"]["EnderecoPrincipal"]["Municipio"]["Nome"]+"'"
     
-    cursor.execute("update emitente set nome = %s,nomeFantasia = %s,cnpj = %s,endereco = %s,numero = %s,bairro = %s,cep = %s,cidade = %s"%(nome,nomeFantasia,cnpj,endereco,numero,bairro,cep,cidade))
+    cursor.execute("delete from emitente")
+    cursor.execute("insert into emitente (nome,nomeFantasia,cnpj,endereco,numero,bairro,cep,cidade) values (%s,%s,%s,%s,%s,%s,%s,%s)"%(nome,nomeFantasia,cnpj,endereco,numero,bairro,cep,cidade))
     conexao.commit()
 
 usuarios = database["Usuarios"]

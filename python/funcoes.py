@@ -20,6 +20,6 @@ def trataData(dataMongo):
     mes = old[5:7]
     ano = old[0:4]
 
-    return dia+'/'+mes+'/'+ano
+    return dia+'.'+mes+'.'+ano
     
   
