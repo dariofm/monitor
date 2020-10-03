@@ -1,0 +1,34 @@
+unit udmDados;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, UniProvider, InterBaseUniProvider, Data.DB,
+  DBAccess, Uni, MemDS, frxClass, frxDBSet,inifiles;
+
+type
+  TdmDados = class(TDataModule)
+    uniConection: TUniConnection;
+    InterBaseUniProvider1: TInterBaseUniProvider;
+    qryNota: TUniQuery;
+    dsNota: TUniDataSource;
+    qryGen: TUniQuery;
+    qryMaxNota: TUniQuery;
+    frxReport1: TfrxReport;
+    frxDBDatasetCupom: TfrxDBDataset;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmDados: TdmDados;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

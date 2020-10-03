@@ -1,0 +1,28 @@
+unit udmDados;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, UniProvider, InterBaseUniProvider, Data.DB,
+  DBAccess, Uni;
+
+type
+  TdmDados = class(TDataModule)
+    uniConection: TUniConnection;
+    InterBaseUniProvider1: TInterBaseUniProvider;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  dmDados: TdmDados;
+
+implementation
+
+{%CLASSGROUP 'Vcl.Controls.TControl'}
+
+{$R *.dfm}
+
+end.

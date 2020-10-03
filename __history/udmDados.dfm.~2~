@@ -1,0 +1,13 @@
+object dmDados: TdmDados
+  OldCreateOrder = False
+  Height = 263
+  Width = 366
+  object uniConection: TUniConnection
+    Left = 56
+    Top = 16
+  end
+  object InterBaseUniProvider1: TInterBaseUniProvider
+    Left = 160
+    Top = 16
+  end
+end

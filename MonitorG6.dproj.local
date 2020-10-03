@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/08/09 13:49:20.000.529,=C:\Users\Kimmera\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/09/30 19:33:44.000.337,=C:\Users\Kimmera\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/09/30 20:19:09.000.005,=C:\Users\Kimmera\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/10/01 21:12:35.000.658,=C:\Users\Kimmera\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/10/01 21:15:31.000.423,C:\Users\Kimmera\Documents\RAD Studio\Projects\Unit1.dfm=C:\Projeto Dev\MonitorG6\ufrmPrincipal.dfm</Transaction>
+    <Transaction>2020/10/01 21:15:31.000.423,C:\Users\Kimmera\Documents\RAD Studio\Projects\Unit1.pas=C:\Projeto Dev\MonitorG6\ufrmPrincipal.pas</Transaction>
+    <Transaction>2020/10/01 21:16:04.000.471,=C:\Users\Kimmera\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2020/10/01 21:16:13.000.393,C:\Users\Kimmera\Documents\RAD Studio\Projects\Unit1.dfm=C:\Projeto Dev\MonitorG6\udmDados.dfm</Transaction>
+    <Transaction>2020/10/01 21:16:13.000.393,C:\Users\Kimmera\Documents\RAD Studio\Projects\Unit1.pas=C:\Projeto Dev\MonitorG6\udmDados.pas</Transaction>
+    <Transaction>2020/10/01 21:41:15.000.860,C:\Users\Kimmera\Documents\RAD Studio\Projects\Project1.dproj=C:\Projeto Dev\MonitorG6\MonitorG6.dproj</Transaction>
+    <Transaction>2020/10/02 21:06:40.000.236,=C:\Projeto Dev\MonitorG6\Unit1.pas</Transaction>
+    <Transaction>2020/10/02 21:06:57.000.967,C:\Projeto Dev\MonitorG6\ufrmConfig.pas=C:\Projeto Dev\MonitorG6\Unit1.pas</Transaction>
+    <Transaction>2020/10/02 21:06:57.000.967,C:\Projeto Dev\MonitorG6\ufrmConfig.dfm=C:\Projeto Dev\MonitorG6\Unit1.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,491 @@
+object dmDados: TdmDados
+  OldCreateOrder = False
+  Height = 263
+  Width = 655
+  object uniConection: TUniConnection
+    ProviderName = 'InterBase'
+    Database = 'C:\Kimmera Monitor\MONITOR.FDB'
+    Username = 'SYSDBA'
+    Password = 'masterkey'
+    Server = '127.0.0.1'
+    Connected = True
+    Left = 56
+    Top = 16
+  end
+  object InterBaseUniProvider1: TInterBaseUniProvider
+    Left = 160
+    Top = 16
+  end
+  object qryNota: TUniQuery
+    Connection = uniConection
+    SQL.Strings = (
+      'select * from nota_manual where caixa = :p0 AND impresso = :p1')
+    Active = True
+    Left = 56
+    Top = 72
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'p0'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'p1'
+        Value = nil
+      end>
+  end
+  object dsNota: TUniDataSource
+    DataSet = qryNota
+    Left = 128
+    Top = 72
+  end
+  object qryGen: TUniQuery
+    Connection = uniConection
+    Left = 56
+    Top = 136
+  end
+  object qryMaxNota: TUniQuery
+    Connection = uniConection
+    SQL.Strings = (
+      
+        'select max(numero) from nota_manual where caixa = :p0 AND impres' +
+        'so = :p1')
+    Left = 56
+    Top = 192
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'p0'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'p1'
+        Value = nil
+      end>
+  end
+  object frxReportCupom: TfrxReport
+    Tag = 1
+    Version = '5.3.16'
+    DotMatrixReport = False
+    IniFile = '\Software\Fast Reports'
+    PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Zoom = 1.000000000000000000
+    PrintOptions.Printer = 'Daruma DR700 Spooler'
+    PrintOptions.PrintOnSheet = 0
+    ReportOptions.CreateDate = 44004.729229872700000000
+    ReportOptions.LastChange = 44106.013166377310000000
+    ScriptLanguage = 'PascalScript'
+    ScriptText.Strings = (
+      'begin'
+      
+        '                                                                ' +
+        '                       '
+      'end.')
+    OnReportPrint = 'frxReportOnReportPrint'
+    Left = 336
+    Top = 8
+    Datasets = <>
+    Variables = <
+      item
+        Name = ' Emitente'
+        Value = Null
+      end
+      item
+        Name = 'Nome_Emitente'
+        Value = Null
+      end
+      item
+        Name = 'Nome_Endereco'
+        Value = Null
+      end
+      item
+        Name = 'Nome_Cliente'
+        Value = Null
+      end
+      item
+        Name = 'Numero'
+        Value = Null
+      end
+      item
+        Name = 'Emissao'
+        Value = Null
+      end
+      item
+        Name = 'hora'
+        Value = Null
+      end
+      item
+        Name = 'obs'
+        Value = Null
+      end>
+    Style = <>
+    object Data: TfrxDataPage
+      Height = 1000.000000000000000000
+      Width = 1000.000000000000000000
+    end
+    object Page1: TfrxReportPage
+      PaperWidth = 74.000000000000000000
+      PaperHeight = 900.000000000000000000
+      PaperSize = 256
+      LeftMargin = 1.000000000000000000
+      RightMargin = 1.000000000000000000
+      TopMargin = 10.000000000000000000
+      BottomMargin = 10.000000000000000000
+      object PageHeader1: TfrxPageHeader
+        FillType = ftBrush
+        Height = 68.031540000000000000
+        Top = 18.897650000000000000
+        Width = 272.126160000000000000
+        object Shape1: TfrxShapeView
+          Left = 3.779530000000000000
+          Width = 268.346630000000000000
+          Height = 56.692950000000000000
+        end
+        object Nome_Emitente: TfrxMemoView
+          Left = 7.559060000000000000
+          Width = 268.346630000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Nome_Emitente]')
+          ParentFont = False
+        end
+        object Nome_Endereco: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 15.118120000000000000
+          Width = 268.346630000000000000
+          Height = 22.677180000000000000
+          Clipped = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -9
+          Font.Name = 'Arial'
+          Font.Style = []
+          HAlign = haCenter
+          Memo.UTF8W = (
+            '[Nome_Endereco]')
+          ParentFont = False
+        end
+        object Numero: TfrxMemoView
+          Left = 49.133890000000000000
+          Top = 37.795300000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Numero]')
+          ParentFont = False
+        end
+        object Memo6: TfrxMemoView
+          Left = 3.779530000000000000
+          Top = 37.795300000000000000
+          Width = 49.133890000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Pedido:')
+          ParentFont = False
+        end
+      end
+      object MasterData1: TfrxMasterData
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -9
+        Font.Name = 'Arial'
+        Font.Style = []
+        Height = 26.456710000000000000
+        ParentFont = False
+        Top = 181.417440000000000000
+        Width = 272.126160000000000000
+        DataSetName = 'cupom'
+        RowCount = 0
+        object cupomDESCRICAO: TfrxMemoView
+          Left = 7.559060000000000000
+          Top = 3.779530000000000000
+          Width = 257.008040000000000000
+          Height = 18.897650000000000000
+          DataField = 'DESCRICAO'
+          DataSetName = 'cupom'
+          Memo.UTF8W = (
+            '[cupom."DESCRICAO"]')
+        end
+        object cupomQTD: TfrxMemoView
+          Left = 120.944960000000000000
+          Top = 3.779530000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          DataField = 'QTD'
+          DataSetName = 'cupom'
+          Memo.UTF8W = (
+            '[cupom."QTD"]')
+        end
+      end
+      object Header1: TfrxHeader
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        Height = 12.472440940000000000
+        ParentFont = False
+        Top = 147.401670000000000000
+        Width = 272.126160000000000000
+        object Memo1: TfrxMemoView
+          Left = 222.992270000000000000
+          Width = 41.574830000000000000
+          Height = 11.716535430000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total')
+          ParentFont = False
+        end
+        object Memo2: TfrxMemoView
+          Left = 177.637910000000000000
+          Width = 30.236240000000000000
+          Height = 11.716535430000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Qtd.')
+          ParentFont = False
+        end
+        object Memo3: TfrxMemoView
+          Left = 113.385900000000000000
+          Width = 56.692950000000000000
+          Height = 11.716535430000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Unit'#225'rio')
+          ParentFont = False
+        end
+        object Memo4: TfrxMemoView
+          Left = 45.354360000000000000
+          Width = 64.252010000000000000
+          Height = 11.716535430000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Descri'#231#227'o')
+          ParentFont = False
+        end
+        object Memo5: TfrxMemoView
+          Width = 41.574830000000000000
+          Height = 12.472440940000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'C'#243'digo')
+          ParentFont = False
+        end
+      end
+      object ColumnFooter1: TfrxColumnFooter
+        FillType = ftBrush
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -13
+        Font.Name = 'Courier New'
+        Font.Style = []
+        Height = 196.535560000000000000
+        ParentFont = False
+        Top = 268.346630000000000000
+        Width = 272.126160000000000000
+        object Shape2: TfrxShapeView
+          Width = 268.346630000000000000
+          Height = 170.078850000000000000
+        end
+        object Emissao: TfrxMemoView
+          Left = 37.795300000000000000
+          Top = 37.795300000000000000
+          Width = 68.031540000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Emissao]')
+          ParentFont = False
+        end
+        object Memo7: TfrxMemoView
+          Top = 37.795300000000000000
+          Width = 49.133890000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Data:')
+          ParentFont = False
+        end
+        object Memo8: TfrxMemoView
+          Top = 52.913420000000000000
+          Width = 49.133890000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Hora:')
+          ParentFont = False
+        end
+        object hora: TfrxMemoView
+          Left = 37.795300000000000000
+          Top = 52.913420000000000000
+          Width = 41.574830000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[hora]')
+          ParentFont = False
+        end
+        object Memo11: TfrxMemoView
+          Top = 24.456710000000000000
+          Width = 64.252010000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          Memo.UTF8W = (
+            'Operador:')
+          ParentFont = False
+        end
+        object Memo12: TfrxMemoView
+          Left = 7.559060000000000000
+          Top = 7.559060000000000000
+          Width = 151.181200000000000000
+          Height = 15.118120000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Total:')
+          ParentFont = False
+        end
+        object Line1: TfrxLineView
+          Left = 120.944960000000000000
+          Top = 188.189240000000000000
+          Width = 11.338590000000000000
+          Color = clBlack
+          Diagonal = True
+        end
+        object Memo9: TfrxMemoView
+          Left = 30.236240000000000000
+          Top = 136.063080000000000000
+          Width = 200.315090000000000000
+          Height = 18.897650000000000000
+          Clipped = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -12
+          Font.Name = 'Courier New'
+          Font.Style = [fsBold]
+          HAlign = haCenter
+          Memo.UTF8W = (
+            'N'#195'O '#201' V'#193'LIDO COMO CUPOM FISCAL')
+          ParentFont = False
+        end
+        object obs: TfrxMemoView
+          Top = 71.811070000000000000
+          Width = 264.567100000000000000
+          Height = 56.692950000000000000
+          Clipped = False
+          Memo.UTF8W = (
+            '[obs]')
+        end
+      end
+    end
+  end
+  object tblEmitente: TUniTable
+    TableName = 'EMITENTE'
+    Connection = uniConection
+    Active = True
+    Left = 352
+    Top = 80
+    object tblEmitenteNOME: TStringField
+      FieldName = 'NOME'
+      Size = 100
+    end
+    object tblEmitenteNOMEFANTASIA: TStringField
+      FieldName = 'NOMEFANTASIA'
+      Size = 100
+    end
+    object tblEmitenteTELEFONE: TStringField
+      FieldName = 'TELEFONE'
+      Size = 15
+    end
+    object tblEmitenteCNPJ: TStringField
+      FieldName = 'CNPJ'
+      Size = 15
+    end
+    object tblEmitenteENDERECO: TStringField
+      FieldName = 'ENDERECO'
+      Size = 40
+    end
+    object tblEmitenteNUMERO: TStringField
+      FieldName = 'NUMERO'
+      Size = 10
+    end
+    object tblEmitenteBAIRRO: TStringField
+      FieldName = 'BAIRRO'
+      Size = 40
+    end
+    object tblEmitenteCEP: TStringField
+      FieldName = 'CEP'
+      Size = 9
+    end
+    object tblEmitenteCIDADE: TStringField
+      FieldName = 'CIDADE'
+      Size = 40
+    end
+  end
+end

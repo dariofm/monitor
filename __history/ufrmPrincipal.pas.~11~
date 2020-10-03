@@ -1,0 +1,82 @@
+unit ufrmPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids,
+  Vcl.StdCtrls, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters,
+  cxContainer, cxEdit, dxSkinsCore, dxSkinsDefaultPainters, cxTextEdit,
+  cxMaskEdit, cxSpinEdit, Vcl.Menus, Vcl.Samples.Spin, cxButtons, cxDropDownEdit,Printers;
+
+type
+  TfrmPrincipal = class(TForm)
+    TimeMonitor: TTimer;
+    cxButton1: TcxButton;
+    SpinTempo: TSpinEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    Label4: TLabel;
+    cxBoxImpressora: TcxComboBox;
+    procedure TimeMonitorTimer(Sender: TObject);
+    procedure cxButton1Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  frmPrincipal: TfrmPrincipal;
+
+implementation
+
+{$R *.dfm}
+
+uses udmDados;
+
+procedure TfrmPrincipal.cxButton1Click(Sender: TObject);
+begin
+TimeMonitor.Interval := TRUNC(SpinTempo.Value * 1000);
+end;
+
+procedure TfrmPrincipal.FormShow(Sender: TObject);
+var
+  I:Integer;
+  impressoras:TPrinter;
+begin
+  impressoras:=TPrinter.Create;
+  try
+  for i := 0 to Printer.Printers. Count - 1 do
+  begin
+
+    cxBoxImpressora.Properties.Items.Add(Printer.Printers.Strings[i] );
+    cxBoxImpressora.ItemIndex:=0;
+  end;
+  finally
+  impressoras.free;
+  end;
+
+
+end;
+
+procedure TfrmPrincipal.TimeMonitorTimer(Sender: TObject);
+begin
+  dmDados.qryNota.close;
+  dmDados.qryNota.Params[0].Value := 3;
+  dmDados.qryNota.Params[1].Value := 0;
+  dmDados.qryNota.open;
+
+  dmDados.qryGen.SQL.Clear;
+  dmDados.qryGen.SQL.Text := 'UPDATE NOTA_MANUAL SET IMPRESSO = :P0 WHERE CAIXA = :P1 AND IMPRESSO = :P2';
+  dmDados.qryGen.Params[0].Value := 1;
+  dmDados.qryGen.Params[1].Value := 3;
+  dmDados.qryGen.Params[2].Value := 0;
+  dmDados.qryGen.ExecSQL;
+
+
+
+end;
+
+end.
