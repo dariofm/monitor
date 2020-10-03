@@ -26,7 +26,7 @@ database = uteis.conexao
 #Inicialização das var
 ativo = True
 produtos = []
-
+#Retorna produtos vendidos no Nota Manual 
 def retornaProdutos(nota_num):
     movimento = database["Movimentacoes"]
     produtos = []
