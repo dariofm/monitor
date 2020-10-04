@@ -70,8 +70,8 @@ while ativo == True:
         print('Imprimindo...')
         os.system('cls')
         #LOG
-        f = open('C:\\Kimmera Monitor\\log.txt', 'w')
-        f.write(str(retornaProdutos(ultimo_numero)))
+        
+        
        
         
         item = 0
@@ -88,11 +88,14 @@ while ativo == True:
             canc = i[5]
             impresso = 0
             try:
-                cursor.execute("insert into NOTA_MANUAL(id,numero,item,emissao,codigointerno,descricao,und,qtd,valor_unitario, valor_total,caixa,impresso) values (%s,%s,%s,%s,%s,%s,%s,%d,%d,%d,%s,%s) "%(idCodigo,ultimo_numero,item,emissao,codigoInterno,descricao,unidade,quantidade,valor_unitario,total,caixa,impresso))
+                f = open('C:\\Kimmera Monitor\\log.txt', 'w')
+                f.write(str(valor_unitario)+' - '+str(retornaProdutos(ultimo_numero)))
+                f.close()
+                cursor.execute("insert into NOTA_MANUAL(id,numero,item,emissao,codigointerno,descricao,und,qtd,valor_unitario, valor_total,caixa,impresso) values (%s,%s,%s,%s,%s,%s,%s,%f,%f,%f,%s,%s) "%(idCodigo,ultimo_numero,item,emissao,codigoInterno,descricao,unidade,quantidade,valor_unitario,total,caixa,impresso))
                 conexao.commit()
             except:
-                f.write(str(retornaProdutos(ultimo_numero)))
-        f.close()
+                f.write(str(valor_unitario)+' - '+str(retornaProdutos(ultimo_numero)))
+
         #Atualiza último cupom gravado
         cursor.execute('update param set controle = %s'%(ultimo_numero))
         conexao.commit()

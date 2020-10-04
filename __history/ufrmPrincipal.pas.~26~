@@ -97,17 +97,15 @@ begin
     dmDados.frxReportCupom.Variables['hora']               := QuotedStr(TimeToStr(time));
     dmDados.frxReportCupom.Variables['OBS']                := QuotedStr('OBS');
 
-    if Application.MessageBox('Imprimir Pedido?','Atenção',MB_ICONQUESTION + MB_YESNO) = 6 then
-    begin
 
-      dmDados.frxReportCupom.Clear;
-      dmDados.frxReportCupom.LoadFromFile('C:\Kimmera Monitor\CupomMei.fr3');
-      dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressora.Text;
-      dmDados.frxReportCupom.PrintOptions.ShowDialog:= false;
-      dmDados.frxReportCupom.PrepareReport;
-      dmDados.frxReportCupom.Print;
 
-    end;
+    dmDados.frxReportCupom.Clear;
+    dmDados.frxReportCupom.LoadFromFile('C:\Kimmera Monitor\CupomMei.fr3');
+    dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressora.Text;
+    dmDados.frxReportCupom.PrintOptions.ShowDialog:= false;
+    dmDados.frxReportCupom.PrepareReport;
+    dmDados.frxReportCupom.Print;
+
 
 
 
