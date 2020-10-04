@@ -4,7 +4,7 @@ object frmPrincipal: TfrmPrincipal
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Monitor de Impressora'
   ClientHeight = 307
-  ClientWidth = 666
+  ClientWidth = 532
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -30,7 +30,7 @@ object frmPrincipal: TfrmPrincipal
     Caption = 'Status: '
   end
   object cxButton1: TcxButton
-    Left = 550
+    Left = 416
     Top = 8
     Width = 108
     Height = 25
@@ -41,7 +41,7 @@ object frmPrincipal: TfrmPrincipal
   object DBGrid1: TDBGrid
     Left = 8
     Top = 88
-    Width = 650
+    Width = 516
     Height = 211
     DataSource = dmDados.dsNota
     TabOrder = 1
@@ -50,43 +50,10 @@ object frmPrincipal: TfrmPrincipal
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'CODIGOINTERNO'
-        Title.Caption = 'C'#243'digo'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'DESCRICAO'
-        Title.Caption = 'Descri'#231#227'o'
-        Width = 358
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'QTD'
-        Title.Caption = 'Qtd.'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'VALOR_UNITARIO'
-        Title.Caption = 'Valor Unit'#225'rio'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'VALOR_TOTAL'
-        Title.Caption = 'Total'
-        Visible = True
-      end>
   end
   object cxCbUsuario: TcxComboBox
     Left = 8
     Top = 61
-    Properties.OnCloseUp = cxCbUsuarioPropertiesCloseUp
     TabOrder = 2
     Text = 'cxCbUsuario'
     Width = 145

@@ -38,12 +38,16 @@ for i in emitente.find({"_t.2":"Emitente"}):
     conexao.commit()
 
 usuarios = database["Usuarios"]
-for i in usuarios.find({"Ativo":True,"$nor": [ { "_t.1":"UsuarioAdministrador"}]}):
+
+cursor.execute("delete from usuario")
+conexao.commit()  
+for i in usuarios.find({"Ativo":True,"$nor": [ { "_t.2":"UsuarioRevenda"},{ "_t.2":"UsuarioSuporte"}]}):
+#for i in usuarios.find({}):    
+
     nomeUsuario = "'"+i["Nome"]+"'"
     
     
-    cursor.execute("delete from usuario")
-    conexao.commit()    
+  
     idUsuario = proximoNumero("GEN_USUARIO_ID")
     cursor.execute('insert into usuario (nome,id) values (%s,%s)'%(nomeUsuario,idUsuario))
     conexao.commit()

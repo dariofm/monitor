@@ -12,7 +12,6 @@ object frmConfig: TfrmConfig
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object Shape1: TShape
@@ -45,7 +44,7 @@ object frmConfig: TfrmConfig
     ClientRectRight = 661
     ClientRectTop = 24
     object cxTabSheet1: TcxTabSheet
-      Caption = 'Monitor'
+      Caption = 'Impresora'
       ImageIndex = 0
       object Label4: TLabel
         Left = 8
@@ -69,13 +68,6 @@ object frmConfig: TfrmConfig
         Height = 13
         Caption = 'Tempo de Monitoramento do Banco ERP em segundos'
         Transparent = True
-      end
-      object Label13: TLabel
-        Left = 8
-        Top = 144
-        Width = 111
-        Height = 13
-        Caption = #218'ltima Nota Manual Erp'
       end
       object cxBoxImpressora: TcxComboBox
         Left = 8
@@ -112,16 +104,6 @@ object frmConfig: TfrmConfig
         Caption = 'Editor de Impresso'
         TabOrder = 3
         OnClick = cxButton2Click
-      end
-      object cxDBSpinEdit1: TcxDBSpinEdit
-        Left = 8
-        Top = 163
-        DataBinding.DataField = 'CONTROLE'
-        DataBinding.DataSource = DataSource2
-        Properties.ImmediatePost = True
-        Properties.MinValue = 1.000000000000000000
-        TabOrder = 4
-        Width = 121
       end
     end
     object cxTabSheet2: TcxTabSheet
@@ -292,8 +274,8 @@ object frmConfig: TfrmConfig
   end
   object DataSource1: TDataSource
     DataSet = dmDados.tblEmitente
-    Left = 560
-    Top = 192
+    Left = 216
+    Top = 224
   end
   object TimerAtualizaCadastro: TTimer
     Enabled = False
@@ -322,10 +304,5 @@ object frmConfig: TfrmConfig
     MemoParentFont = False
     Left = 520
     Top = 80
-  end
-  object DataSource2: TDataSource
-    DataSet = dmDados.tblParam
-    Left = 480
-    Top = 192
   end
 end

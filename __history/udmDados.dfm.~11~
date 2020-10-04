@@ -67,7 +67,7 @@ object dmDados: TdmDados
   end
   object frxReportCupom: TfrxReport
     Tag = 1
-    Version = '5.2.3'
+    Version = '5.3.16'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -487,22 +487,5 @@ object dmDados: TdmDados
       FieldName = 'CIDADE'
       Size = 40
     end
-  end
-  object tblParam: TUniTable
-    TableName = 'PARAM'
-    Connection = uniConection
-    Active = True
-    Left = 352
-    Top = 136
-    object tblParamCONTROLE: TIntegerField
-      FieldName = 'CONTROLE'
-    end
-  end
-  object tblUsuario: TUniTable
-    TableName = 'USUARIO'
-    Connection = uniConection
-    Active = True
-    Left = 352
-    Top = 200
   end
 end

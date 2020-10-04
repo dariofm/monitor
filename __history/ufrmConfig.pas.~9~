@@ -9,7 +9,7 @@ uses
   dxSkinsDefaultPainters, Vcl.Menus, Vcl.StdCtrls, Vcl.Samples.Spin, cxButtons,
   cxTextEdit, cxMaskEdit, cxDropDownEdit, dxSkinscxPCPainter,
   cxPCdxBarPopupMenu, Vcl.ExtCtrls, cxPC, frxClass, frxDBSet, cxDBEdit, Data.DB,
-  frxDesgn, cxSpinEdit;
+  frxDesgn;
 
 type
   TfrmConfig = class(TForm)
@@ -48,13 +48,9 @@ type
     cxButton3: TcxButton;
     TimerAtualizaCadastro: TTimer;
     frxDesigner1: TfrxDesigner;
-    DataSource2: TDataSource;
-    Label13: TLabel;
-    cxDBSpinEdit1: TcxDBSpinEdit;
     procedure cxButton1Click(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
     procedure cxButton3Click(Sender: TObject);
-    procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
   public
@@ -86,18 +82,6 @@ begin
   end;
   // Apresenta a mensagem
 
-
-  if dmDados.tblEmitente.State in [dsEdit] then
-  begin
-    dmDados.tblEmitente.Post;
-  end;
-
-  if dmDados.tblParam.State in [dsEdit] then
-  begin
-    dmDados.tblParam.Post;
-  end;
-
-
 frmPrincipal.TimeMonitor.Interval := TRUNC(frmConfig.SpinTempo.Value * 1000);
 end;
 
@@ -117,11 +101,6 @@ begin
   dmDados.tblEmitente.Refresh;
   TimerAtualizaCadastro.Enabled := false;
 
-end;
-
-procedure TfrmConfig.FormClose(Sender: TObject; var Action: TCloseAction);
-begin
-    frmprincipal.TimeMonitor.Enabled := true;
 end;
 
 end.

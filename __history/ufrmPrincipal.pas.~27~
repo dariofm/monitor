@@ -20,7 +20,6 @@ type
     procedure TimeMonitorTimer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure cxButton1Click(Sender: TObject);
-    procedure cxCbUsuarioPropertiesCloseUp(Sender: TObject);
   private
     { Private declarations }
   public
@@ -39,28 +38,7 @@ uses udmDados, ufrmConfig;
 
 procedure TfrmPrincipal.cxButton1Click(Sender: TObject);
 begin
-  SetWindowPos(frmPrincipal.handle, HWND_NOTOPMOST, frmPrincipal.Left, frmPrincipal.Top,frmPrincipal.Width, frmPrincipal.Height, 0);
-  TimeMonitor.Enabled := false;
-
   frmConfig.ShowModal;
-
-end;
-
-procedure TfrmPrincipal.cxCbUsuarioPropertiesCloseUp(Sender: TObject);
-var
-  ArqINI: TIniFile;
-begin
-  // Cria o arquivo "Configuracao.ini" no mesmo diretório da aplicação, com o nome Config.ini
-  ArqINI := TIniFile.Create(ExtractFilePath(Application.ExeName) + 'Configuracao.ini');
-  try
-    // Grava os dados no arquivo "Config.ini"
-    ArqINI.WriteString('Parametro', 'Usuario', cxCbUsuario.Text);
-
-  finally
-    // Liberar a referência do arquivo da memória
-    ArqINI.Free;
-  end;
-
 end;
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
@@ -89,16 +67,6 @@ begin
    frmConfig.cxBoxImpressora.Text := '';
   end;
 
-  dmDados.tblUsuario.First;
-  cxCbUsuario.Clear;
-  while not dmDados.tblUsuario.Eof do
-  begin
-
-    cxCbUsuario.Properties.Items.Add(dmDados.tblUsuario.FieldByName('nome').AsString);
-    cxCbUsuario.Text := ArquivoConfig.ReadString('Parametro', 'Usuario', '');
-    dmDados.tblUsuario.Next;
-  end;
-
   ArquivoConfig.Free;
 
 
@@ -114,45 +82,26 @@ begin
   dmDados.qryNota.Params[1].Value := 0;
   dmDados.qryNota.open;
 
-  if dmDados.qryNota.RecordCount > 0   then
+  if dmDados.qryNota.FieldByName('NUMERO').AsString <> ''   then
   begin
     TimeMonitor.Enabled := false;
-
-    if TimeMonitor.Enabled = false then
-    begin
-
-      SetWindowPos(frmPrincipal.handle, HWND_TOPMOST, frmPrincipal.Left, frmPrincipal.Top,frmPrincipal.Width, frmPrincipal.Height, 0);
-      frmPrincipal.FormStyle := fsStayOnTop;
-
-
-    end
-      else
-        begin
-
-          SetWindowPos(frmPrincipal.handle, HWND_NOTOPMOST, frmPrincipal.Left, frmPrincipal.Top,frmPrincipal.Width, frmPrincipal.Height, 0);
-
-        end;
-
-
     lblUltimaNota.Caption := 'Última Nota: '+dmDados.qryNota.FieldByName('NUMERO').AsString;
 
-    dmDados.frxReportCupom.Clear;
-    dmDados.frxReportCupom.LoadFromFile('C:\Kimmera Monitor\CupomMei.fr3');
 
 
-    dmDados.frxReportCupom.Variables['Nome_Emitente']      := QuotedStr(dmDados.tblEmitenteNOMEFANTASIA.AsString);
-    dmDados.frxReportCupom.Variables['Nome_Endereco']      := QuotedStr(dmDados.tblEmitenteENDERECO.AsString+', '+dmDados.tblEmitenteNUMERO.AsString+' - '+dmDados.tblEmitenteBAIRRO.AsString);
+    dmDados.frxReportCupom.Variables['Nome_Emitente']      := QuotedStr('EMITENTE');
+    dmDados.frxReportCupom.Variables['Nome_Endereco']      := QuotedStr('ENDERECO');
     dmDados.frxReportCupom.Variables['Nome_Cliente']       := QuotedStr('Consumidor');
+    dmDados.frxReportCupom.Variables['Numero']             := QuotedStr('11');
     dmDados.frxReportCupom.Variables['Emissao']            := QuotedStr(DateToStr(date));
     dmDados.frxReportCupom.Variables['hora']               := QuotedStr(TimeToStr(time));
-
-
-
-
+    dmDados.frxReportCupom.Variables['OBS']                := QuotedStr('OBS');
 
     if Application.MessageBox('Imprimir Pedido?','Atenção',MB_ICONQUESTION + MB_YESNO) = 6 then
     begin
 
+      dmDados.frxReportCupom.Clear;
+      dmDados.frxReportCupom.LoadFromFile('C:\Kimmera Monitor\CupomMei.fr3');
       dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressora.Text;
       dmDados.frxReportCupom.PrintOptions.ShowDialog:= false;
       dmDados.frxReportCupom.PrepareReport;
