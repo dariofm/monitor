@@ -19,7 +19,7 @@ object dmDados: TdmDados
   object qryNota: TUniQuery
     Connection = uniConection
     SQL.Strings = (
-      'select * from nota_manual where usuario = :p0 AND impresso = :p1')
+      'select * from nota_manual where caixa = :p0 AND impresso = :p1')
     Active = True
     Left = 56
     Top = 72
@@ -49,8 +49,8 @@ object dmDados: TdmDados
     Connection = uniConection
     SQL.Strings = (
       
-        'select max(numero) from nota_manual where usuario = :p0 AND impr' +
-        'esso = :p1')
+        'select max(numero) from nota_manual where caixa = :p0 AND impres' +
+        'so = :p1')
     Left = 56
     Top = 192
     ParamData = <
@@ -75,7 +75,7 @@ object dmDados: TdmDados
     PrintOptions.Printer = 'Daruma DR700 Spooler'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44004.729229872700000000
-    ReportOptions.LastChange = 44108.424567557870000000
+    ReportOptions.LastChange = 44106.013166377310000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -86,11 +86,7 @@ object dmDados: TdmDados
     OnReportPrint = 'frxReportOnReportPrint'
     Left = 336
     Top = 8
-    Datasets = <
-      item
-        DataSet = frmConfig.frxDBDatasetCupom
-        DataSetName = 'cupom'
-      end>
+    Datasets = <>
     Variables = <
       item
         Name = ' Emitente'
@@ -177,11 +173,25 @@ object dmDados: TdmDados
             '[Nome_Endereco]')
           ParentFont = False
         end
+        object Numero: TfrxMemoView
+          Left = 49.133890000000000000
+          Top = 37.795300000000000000
+          Width = 68.031540000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          Memo.UTF8W = (
+            '[Numero]')
+          ParentFont = False
+        end
         object Memo6: TfrxMemoView
           Left = 3.779530000000000000
           Top = 37.795300000000000000
           Width = 49.133890000000000000
-          Height = 15.118120000000000000
+          Height = 18.897650000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -191,102 +201,39 @@ object dmDados: TdmDados
             'Pedido:')
           ParentFont = False
         end
-        object Numero: TfrxMemoView
-          Left = 52.913420000000000000
-          Top = 37.795300000000000000
-          Width = 79.370130000000000000
-          Height = 18.897650000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Courier New'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[Numero]')
-          ParentFont = False
-        end
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
-        Font.Height = -11
-        Font.Name = 'Courier New'
+        Font.Height = -9
+        Font.Name = 'Arial'
         Font.Style = []
-        Height = 23.055125430000000000
+        Height = 26.456710000000000000
         ParentFont = False
         Top = 181.417440000000000000
         Width = 272.126160000000000000
-        DataSet = frmConfig.frxDBDatasetCupom
         DataSetName = 'cupom'
         RowCount = 0
         object cupomDESCRICAO: TfrxMemoView
+          Left = 7.559060000000000000
+          Top = 3.779530000000000000
           Width = 257.008040000000000000
-          Height = 11.716535430000000000
+          Height = 18.897650000000000000
           DataField = 'DESCRICAO'
-          DataSet = frmConfig.frxDBDatasetCupom
           DataSetName = 'cupom'
           Memo.UTF8W = (
             '[cupom."DESCRICAO"]')
         end
         object cupomQTD: TfrxMemoView
-          Left = 170.078850000000000000
-          Top = 11.338590000000000000
-          Width = 37.795300000000000000
-          Height = 11.716535430000000000
+          Left = 120.944960000000000000
+          Top = 3.779530000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
           DataField = 'QTD'
-          DataSet = frmConfig.frxDBDatasetCupom
           DataSetName = 'cupom'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Courier New'
-          Font.Style = []
-          HAlign = haRight
           Memo.UTF8W = (
             '[cupom."QTD"]')
-          ParentFont = False
-        end
-        object cupomVALOR_UNITARIO: TfrxMemoView
-          Left = 83.149660000000000000
-          Top = 11.338590000000000000
-          Width = 86.929190000000000000
-          Height = 11.716535430000000000
-          DataField = 'VALOR_UNITARIO'
-          DataSet = frmConfig.frxDBDatasetCupom
-          DataSetName = 'cupom'
-          DisplayFormat.FormatStr = '%2.2n'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'courier New'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[cupom."VALOR_UNITARIO"]')
-          ParentFont = False
-        end
-        object cupomVALOR_TOTAL: TfrxMemoView
-          Left = 185.196970000000000000
-          Top = 11.338590000000000000
-          Width = 79.370130000000000000
-          Height = 11.716535430000000000
-          DataField = 'VALOR_TOTAL'
-          DataSet = frmConfig.frxDBDatasetCupom
-          DataSetName = 'cupom'
-          DisplayFormat.FormatStr = '%2.2n'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'courier New'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[cupom."VALOR_TOTAL"]')
-          ParentFont = False
         end
       end
       object Header1: TfrxHeader
@@ -371,12 +318,12 @@ object dmDados: TdmDados
         FillType = ftBrush
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
-        Font.Height = -11
+        Font.Height = -13
         Font.Name = 'Courier New'
         Font.Style = []
         Height = 196.535560000000000000
         ParentFont = False
-        Top = 264.567100000000000000
+        Top = 268.346630000000000000
         Width = 272.126160000000000000
         object Shape2: TfrxShapeView
           Width = 268.346630000000000000
@@ -451,7 +398,7 @@ object dmDados: TdmDados
         end
         object Memo12: TfrxMemoView
           Left = 7.559060000000000000
-          Top = 3.779530000000000000
+          Top = 7.559060000000000000
           Width = 151.181200000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -494,25 +441,6 @@ object dmDados: TdmDados
           Clipped = False
           Memo.UTF8W = (
             '[obs]')
-        end
-        object cupomVALOR_TOTAL1: TfrxMemoView
-          Left = 166.299320000000000000
-          Top = 3.779530000000000000
-          Width = 98.267780000000000000
-          Height = 15.118110236220500000
-          DataSet = frmConfig.frxDBDatasetCupom
-          DataSetName = 'cupom'
-          DisplayFormat.FormatStr = '%2.2n'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -12
-          Font.Name = 'Courier New'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[SUM(<cupom."VALOR_TOTAL">,MasterData1)]')
-          ParentFont = False
         end
       end
     end

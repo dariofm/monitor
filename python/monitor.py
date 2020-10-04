@@ -11,7 +11,7 @@ from funcoes import trataData
 
 config = configparser.RawConfigParser()
 config.read('C:\\Kimmera Monitor\\monitor.ini')
-caixa = config.getint('TERMINAL', 'Caixa')
+#caixa = config.getint('TERMINAL', 'Caixa')
 
 
 conexao = firebirdsql.connect(user="SYSDBA",password="masterkey",database="C:\\Kimmera Monitor\\monitor.fdb",host="localhost",charset="ISO8859_1")
@@ -53,6 +53,7 @@ while ativo == True:
     for i in movimento.find({"_t.3":"NotaFiscalManual"}):
         ultimo_numero = i["Numero"]
         emissao = "'"+trataData(i["DataHoraEmissao"])+"'"
+        usuario = "'"+i["NomeUsuario"]+"'"
     cursor.execute('select controle from param')
     resultado = cursor.fetchall()
     controle = 0
@@ -87,15 +88,16 @@ while ativo == True:
             total = i[3] * i[4]
             canc = i[5]
             impresso = 0
+            f = open('C:\\Kimmera Monitor\\log.txt', 'w')
             try:
-                f = open('C:\\Kimmera Monitor\\log.txt', 'w')
+                
                 f.write(str(valor_unitario)+' - '+str(retornaProdutos(ultimo_numero)))
-                f.close()
-                cursor.execute("insert into NOTA_MANUAL(id,numero,item,emissao,codigointerno,descricao,und,qtd,valor_unitario, valor_total,caixa,impresso) values (%s,%s,%s,%s,%s,%s,%s,%f,%f,%f,%s,%s) "%(idCodigo,ultimo_numero,item,emissao,codigoInterno,descricao,unidade,quantidade,valor_unitario,total,caixa,impresso))
+                
+                cursor.execute("insert into NOTA_MANUAL(id,numero,item,emissao,codigointerno,descricao,und,qtd,valor_unitario, valor_total,usuario,impresso) values (%s,%s,%s,%s,%s,%s,%s,%f,%f,%f,%s,%s) "%(idCodigo,ultimo_numero,item,emissao,codigoInterno,descricao,unidade,quantidade,valor_unitario,total,usuario,impresso))
                 conexao.commit()
             except:
                 f.write(str(valor_unitario)+' - '+str(retornaProdutos(ultimo_numero)))
-
+            f.close()
         #Atualiza último cupom gravado
         cursor.execute('update param set controle = %s'%(ultimo_numero))
         conexao.commit()

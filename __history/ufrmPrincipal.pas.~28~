@@ -29,7 +29,7 @@ type
 
 var
   frmPrincipal: TfrmPrincipal;
-  intervalo,usuario:string;
+  intervalo:string;
 
 implementation
 
@@ -96,7 +96,6 @@ begin
 
     cxCbUsuario.Properties.Items.Add(dmDados.tblUsuario.FieldByName('nome').AsString);
     cxCbUsuario.Text := ArquivoConfig.ReadString('Parametro', 'Usuario', '');
-    usuario := ArquivoConfig.ReadString('Parametro', 'Usuario', '');
     dmDados.tblUsuario.Next;
   end;
 
@@ -111,7 +110,7 @@ begin
 
   lblStatus.Caption := 'Status: Monitorando...';
   dmDados.qryNota.close;
-  dmDados.qryNota.Params[0].Value := usuario;
+  dmDados.qryNota.Params[0].Value := 3;
   dmDados.qryNota.Params[1].Value := 0;
   dmDados.qryNota.open;
 
@@ -126,7 +125,13 @@ begin
       frmPrincipal.FormStyle := fsStayOnTop;
 
 
-    end;
+    end
+      else
+        begin
+
+          SetWindowPos(frmPrincipal.handle, HWND_NOTOPMOST, frmPrincipal.Left, frmPrincipal.Top,frmPrincipal.Width, frmPrincipal.Height, 0);
+
+        end;
 
 
     lblUltimaNota.Caption := 'Última Nota: '+dmDados.qryNota.FieldByName('NUMERO').AsString;
@@ -134,41 +139,40 @@ begin
     dmDados.frxReportCupom.Clear;
     dmDados.frxReportCupom.LoadFromFile('C:\Kimmera Monitor\CupomMei.fr3');
 
-    dmDados.frxReportCupom.Variables['NUMERO']             := QuotedStr(Format('%10.10d',[dmDados.qryNota.FieldByName('Numero').AsInteger]));
+
     dmDados.frxReportCupom.Variables['Nome_Emitente']      := QuotedStr(dmDados.tblEmitenteNOMEFANTASIA.AsString);
     dmDados.frxReportCupom.Variables['Nome_Endereco']      := QuotedStr(dmDados.tblEmitenteENDERECO.AsString+', '+dmDados.tblEmitenteNUMERO.AsString+' - '+dmDados.tblEmitenteBAIRRO.AsString);
-    dmDados.frxReportCupom.Variables['Nome_Cliente']       := QuotedStr(dmDados.qryNota.FieldByName('Usuario').AsString);
+    dmDados.frxReportCupom.Variables['Nome_Cliente']       := QuotedStr('Consumidor');
     dmDados.frxReportCupom.Variables['Emissao']            := QuotedStr(DateToStr(date));
-
     dmDados.frxReportCupom.Variables['hora']               := QuotedStr(TimeToStr(time));
 
 
 
 
 
-    //if Application.MessageBox('Imprimir Pedido?','Atenção',MB_ICONQUESTION + MB_YESNO) = 6 then
-    //begin
+    if Application.MessageBox('Imprimir Pedido?','Atenção',MB_ICONQUESTION + MB_YESNO) = 6 then
+    begin
 
       dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressora.Text;
       dmDados.frxReportCupom.PrintOptions.ShowDialog:= false;
       dmDados.frxReportCupom.PrepareReport;
       dmDados.frxReportCupom.Print;
 
-    //end;
+    end;
 
 
 
 
 
-  SetWindowPos(frmPrincipal.handle, HWND_NOTOPMOST, frmPrincipal.Left, frmPrincipal.Top,frmPrincipal.Width, frmPrincipal.Height, 0);
+
   lblStatus.Caption := 'Status: Imprimindo...';
 
   end;
 
   dmDados.qryGen.SQL.Clear;
-  dmDados.qryGen.SQL.Text := 'UPDATE NOTA_MANUAL SET IMPRESSO = :P0 WHERE USUARIO = :P1 AND IMPRESSO = :P2';
+  dmDados.qryGen.SQL.Text := 'UPDATE NOTA_MANUAL SET IMPRESSO = :P0 WHERE CAIXA = :P1 AND IMPRESSO = :P2';
   dmDados.qryGen.Params[0].Value := 1;
-  dmDados.qryGen.Params[1].Value := usuario;
+  dmDados.qryGen.Params[1].Value := 3;
   dmDados.qryGen.Params[2].Value := 0;
   dmDados.qryGen.ExecSQL;
 

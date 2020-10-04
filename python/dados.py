@@ -44,7 +44,7 @@ conexao.commit()
 for i in usuarios.find({"Ativo":True,"$nor": [ { "_t.2":"UsuarioRevenda"},{ "_t.2":"UsuarioSuporte"}]}):
 #for i in usuarios.find({}):    
 
-    nomeUsuario = "'"+i["Nome"]+"'"
+    nomeUsuario = "'"+i["AcessoAlternativo"]+"'"
     
     
   
