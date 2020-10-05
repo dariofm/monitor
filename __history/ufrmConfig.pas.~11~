@@ -110,15 +110,9 @@ end;
 
 procedure TfrmConfig.cxButton3Click(Sender: TObject);
 begin
-WinExec('C:\Kimmera Monitor\App\dados.exe',0);
-cxPageControl1.Enabled := false;
-while dmDados.tblEmitente.FieldByName('NOME').AsString = 'NOME' do
-begin
 
-  dmDados.tblEmitente.Refresh;
-end;
+  WinExec('C:\Kimmera Monitor\App\dados.exe',0);
 
-cxPageControl1.Enabled := true;
 
 end;
 
