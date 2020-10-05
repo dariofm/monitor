@@ -113,9 +113,6 @@ begin
 
   WinExec('C:\Kimmera Monitor\App\dados.exe',0);
 
-  TimerAtualizaCadastro.Enabled := true;
-  dmDados.tblEmitente.Refresh;
-  TimerAtualizaCadastro.Enabled := false;
 
 end;
 

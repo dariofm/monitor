@@ -39,7 +39,7 @@ object frmConfig: TfrmConfig
     Height = 257
     Align = alTop
     TabOrder = 1
-    Properties.ActivePage = cxTabSheet1
+    Properties.ActivePage = cxTabSheet2
     Properties.CustomButtons.Buttons = <>
     ClientRectBottom = 257
     ClientRectRight = 661
