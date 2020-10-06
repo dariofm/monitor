@@ -12,6 +12,7 @@ object frmConfig: TfrmConfig
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
@@ -39,9 +40,8 @@ object frmConfig: TfrmConfig
     Height = 257
     Align = alTop
     TabOrder = 1
-    Properties.ActivePage = cxTabSheet2
+    Properties.ActivePage = cxTabSheet1
     Properties.CustomButtons.Buttons = <>
-    ExplicitTop = 1
     ClientRectBottom = 257
     ClientRectRight = 661
     ClientRectTop = 24
@@ -65,18 +65,28 @@ object frmConfig: TfrmConfig
       end
       object Label2: TLabel
         Left = 89
-        Top = 93
+        Top = 214
         Width = 257
         Height = 13
         Caption = 'Tempo de Monitoramento do Banco ERP em segundos'
         Transparent = True
+        Visible = False
       end
       object Label13: TLabel
-        Left = 8
-        Top = 144
+        Left = 520
+        Top = 8
         Width = 111
         Height = 13
         Caption = #218'ltima Nota Manual Erp'
+        Visible = False
+      end
+      object Label14: TLabel
+        Left = 8
+        Top = 115
+        Width = 153
+        Height = 13
+        Caption = 'Pedir confirma'#231#227'o de Impress'#227'o'
+        Transparent = True
       end
       object cxBoxImpressora: TcxComboBox
         Left = 8
@@ -95,19 +105,20 @@ object frmConfig: TfrmConfig
         TabOrder = 1
         Value = 1
       end
-      object SpinEdit1: TSpinEdit
+      object SpinErp: TSpinEdit
         Left = 8
-        Top = 84
+        Top = 205
         Width = 75
         Height = 22
         MaxValue = 999
         MinValue = 1
         TabOrder = 2
         Value = 1
+        Visible = False
       end
       object cxButton2: TcxButton
         Left = 8
-        Top = 112
+        Top = 84
         Width = 113
         Height = 25
         Caption = 'Editor de Impresso'
@@ -115,13 +126,25 @@ object frmConfig: TfrmConfig
         OnClick = cxButton2Click
       end
       object cxDBSpinEdit1: TcxDBSpinEdit
-        Left = 8
-        Top = 163
+        Left = 520
+        Top = 27
         DataBinding.DataField = 'CONTROLE'
         DataBinding.DataSource = DataSource2
         Properties.ImmediatePost = True
         Properties.MinValue = 1.000000000000000000
         TabOrder = 4
+        Visible = False
+        Width = 121
+      end
+      object cxCbConfirmImp: TcxComboBox
+        Left = 8
+        Top = 134
+        Properties.DropDownListStyle = lsEditFixedList
+        Properties.Items.Strings = (
+          'Sim'
+          'N'#227'o')
+        TabOrder = 5
+        Text = 'Sim'
         Width = 121
       end
     end
@@ -200,6 +223,13 @@ object frmConfig: TfrmConfig
         Caption = 'CIDADE'
         FocusControl = cxDBTextEdit9
       end
+      object lblsStatus: TLabel
+        Left = 84
+        Top = 214
+        Width = 161
+        Height = 13
+        AutoSize = False
+      end
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 8
         Top = 16
@@ -273,8 +303,8 @@ object frmConfig: TfrmConfig
         Width = 121
       end
       object cxButton3: TcxButton
-        Left = 8
-        Top = 176
+        Left = 583
+        Top = 3
         Width = 75
         Height = 25
         Caption = 'Carregar'
@@ -328,5 +358,10 @@ object frmConfig: TfrmConfig
     DataSet = dmDados.tblParam
     Left = 480
     Top = 192
+  end
+  object DataSource3: TDataSource
+    DataSet = dmDados.tblParam
+    Left = 488
+    Top = 200
   end
 end

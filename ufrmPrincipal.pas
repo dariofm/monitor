@@ -17,6 +17,7 @@ type
     cxButton1: TcxButton;
     DBGrid1: TDBGrid;
     cxCbUsuario: TcxComboBox;
+    cxButton2: TcxButton;
     procedure TimeMonitorTimer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure cxButton1Click(Sender: TObject);
@@ -82,7 +83,9 @@ begin
   end;
 
   ArquivoConfig := TIniFile.Create(ExtractFilePath(Application.ExeName) + 'Configuracao.ini');
-  intervalo := ArquivoConfig.ReadString('Parametro', 'Intervalo', '');
+  TimeMonitor.Interval :=  TRUNC(ArquivoConfig.ReadInteger('Parametro', 'Intervalo', 0)*1000);
+  frmConfig.SpinTempo.Value := ArquivoConfig.ReadInteger('Parametro', 'Intervalo', 0);
+  frmConfig.cxCbConfirmImp.Text := ArquivoConfig.ReadString('Parametro', 'AutoImp', '');
   try
    frmConfig.cxBoxImpressora.Text :=  ArquivoConfig.ReadString('Parametro', 'Impressora', '');
   except
@@ -139,28 +142,36 @@ begin
     dmDados.frxReportCupom.Variables['Nome_Endereco']      := QuotedStr(dmDados.tblEmitenteENDERECO.AsString+', '+dmDados.tblEmitenteNUMERO.AsString+' - '+dmDados.tblEmitenteBAIRRO.AsString);
     dmDados.frxReportCupom.Variables['Nome_Cliente']       := QuotedStr(dmDados.qryNota.FieldByName('Usuario').AsString);
     dmDados.frxReportCupom.Variables['Emissao']            := QuotedStr(DateToStr(date));
-
     dmDados.frxReportCupom.Variables['hora']               := QuotedStr(TimeToStr(time));
+    dmDados.frxReportCupom.Variables['operador']           := QuotedStr(cxCbUsuario.Text);
+
+
+
+    if frmConfig.cxCbConfirmImp.Text = 'Sim' then
+    begin
+      if Application.MessageBox('Imprimir Pedido?','Atenção',MB_ICONQUESTION + MB_YESNO) = 6 then
+      begin
+
+        dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressora.Text;
+        dmDados.frxReportCupom.PrintOptions.ShowDialog:= false;
+        dmDados.frxReportCupom.PrepareReport;
+        dmDados.frxReportCupom.Print;
+
+      end;
+    end;
+      if frmConfig.cxCbConfirmImp.Text = 'Não' then
+      begin
+        dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressora.Text;
+        dmDados.frxReportCupom.PrintOptions.ShowDialog:= false;
+        dmDados.frxReportCupom.PrepareReport;
+        dmDados.frxReportCupom.Print;
+      end;
 
 
 
 
 
-    //if Application.MessageBox('Imprimir Pedido?','Atenção',MB_ICONQUESTION + MB_YESNO) = 6 then
-    //begin
 
-      dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressora.Text;
-      dmDados.frxReportCupom.PrintOptions.ShowDialog:= false;
-      dmDados.frxReportCupom.PrepareReport;
-      dmDados.frxReportCupom.Print;
-
-    //end;
-
-
-
-
-
-  SetWindowPos(frmPrincipal.handle, HWND_NOTOPMOST, frmPrincipal.Left, frmPrincipal.Top,frmPrincipal.Width, frmPrincipal.Height, 0);
   lblStatus.Caption := 'Status: Imprimindo...';
 
   end;
@@ -173,7 +184,8 @@ begin
   dmDados.qryGen.ExecSQL;
 
   TimeMonitor.Enabled := true;
+  SetWindowPos(frmPrincipal.handle, HWND_NOTOPMOST, frmPrincipal.Left, frmPrincipal.Top,frmPrincipal.Width, frmPrincipal.Height, 0);
+  end;
 
-end;
 
 end.

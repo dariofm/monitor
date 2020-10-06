@@ -34,6 +34,46 @@ object dmDados: TdmDados
         Name = 'p1'
         Value = nil
       end>
+    object qryNotaID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qryNotaITEM: TIntegerField
+      FieldName = 'ITEM'
+    end
+    object qryNotaNUMERO: TIntegerField
+      FieldName = 'NUMERO'
+    end
+    object qryNotaEMISSAO: TDateField
+      FieldName = 'EMISSAO'
+    end
+    object qryNotaCODIGOINTERNO: TIntegerField
+      FieldName = 'CODIGOINTERNO'
+      DisplayFormat = '000000'
+    end
+    object qryNotaDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 100
+    end
+    object qryNotaUND: TStringField
+      FieldName = 'UND'
+      Size = 4
+    end
+    object qryNotaQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object qryNotaVALOR_UNITARIO: TFloatField
+      FieldName = 'VALOR_UNITARIO'
+    end
+    object qryNotaVALOR_TOTAL: TFloatField
+      FieldName = 'VALOR_TOTAL'
+    end
+    object qryNotaUSUARIO: TStringField
+      FieldName = 'USUARIO'
+    end
+    object qryNotaIMPRESSO: TIntegerField
+      FieldName = 'IMPRESSO'
+    end
   end
   object dsNota: TUniDataSource
     DataSet = qryNota

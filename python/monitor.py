@@ -48,9 +48,11 @@ def retornaProdutos(nota_num):
             produtos = ['Não há movimentação']
     return produtos
 
+query = {"_t.3":"NotaFiscalManual"}
+collection = {"Numero":1,"DataHoraEmissao":1,"NomeUsuario":1}
 while ativo == True:
     movimento = database["Movimentacoes"]
-    for i in movimento.find({"_t.3":"NotaFiscalManual"}):
+    for i in movimento.find(query,collection).sort("Numero",-1).limit(1):
         ultimo_numero = i["Numero"]
         emissao = "'"+trataData(i["DataHoraEmissao"])+"'"
         usuario = "'"+i["NomeUsuario"]+"'"
@@ -59,8 +61,7 @@ while ativo == True:
     controle = 0
     
     for i in resultado:
-        
-        controle = i[0]
+         controle = i[0]
 
     if controle == ultimo_numero:
         

@@ -28,6 +28,18 @@ type
     tblParam: TUniTable;
     tblParamCONTROLE: TIntegerField;
     tblUsuario: TUniTable;
+    qryNotaID: TIntegerField;
+    qryNotaITEM: TIntegerField;
+    qryNotaNUMERO: TIntegerField;
+    qryNotaEMISSAO: TDateField;
+    qryNotaCODIGOINTERNO: TIntegerField;
+    qryNotaDESCRICAO: TStringField;
+    qryNotaUND: TStringField;
+    qryNotaQTD: TFloatField;
+    qryNotaVALOR_UNITARIO: TFloatField;
+    qryNotaVALOR_TOTAL: TFloatField;
+    qryNotaUSUARIO: TStringField;
+    qryNotaIMPRESSO: TIntegerField;
   private
     { Private declarations }
   public

@@ -10,6 +10,12 @@ uses
   cxTextEdit, cxMaskEdit, cxDropDownEdit, dxSkinscxPCPainter,
   cxPCdxBarPopupMenu, Vcl.ExtCtrls, cxPC, frxClass, frxDBSet, cxDBEdit, Data.DB,
   frxDesgn, cxSpinEdit;
+type
+  TCarregaEmitente = Class(TThread)
+  protected
+    procedure Execute; override;
+
+  End;
 
 type
   TfrmConfig = class(TForm)
@@ -22,7 +28,7 @@ type
     Label2: TLabel;
     cxBoxImpressora: TcxComboBox;
     SpinTempo: TSpinEdit;
-    SpinEdit1: TSpinEdit;
+    SpinErp: TSpinEdit;
     cxButton2: TcxButton;
     Shape1: TShape;
     frxDBDatasetCupom: TfrxDBDataset;
@@ -51,10 +57,14 @@ type
     DataSource2: TDataSource;
     Label13: TLabel;
     cxDBSpinEdit1: TcxDBSpinEdit;
+    lblsStatus: TLabel;
+    DataSource3: TDataSource;
+    cxCbConfirmImp: TcxComboBox;
+    Label14: TLabel;
     procedure cxButton1Click(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
-    procedure cxButton3Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure cxButton3Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -79,7 +89,9 @@ begin
   try
     // Grava os dados no arquivo "Config.ini"
     ArqINI.WriteString('Parametro', 'Intervalo', SpinTempo.Text);
+    //ArqINI.WriteString('Parametro', 'IntervaloErp', SpinErp.Text);
     ArqINI.WriteString('Parametro', 'Impressora', cxBoxImpressora.Text);
+    ArqINI.WriteString('Parametro', 'AutoImp', cxCbConfirmImp.Text);
   finally
     // Liberar a referência do arquivo da memória
     ArqINI.Free;
@@ -99,6 +111,9 @@ begin
 
 
 frmPrincipal.TimeMonitor.Interval := TRUNC(frmConfig.SpinTempo.Value * 1000);
+
+close;
+
 end;
 
 procedure TfrmConfig.cxButton2Click(Sender: TObject);
@@ -109,22 +124,38 @@ begin
 end;
 
 procedure TfrmConfig.cxButton3Click(Sender: TObject);
-begin
-WinExec('C:\Kimmera Monitor\App\dados.exe',0);
-cxPageControl1.Enabled := false;
-while dmDados.tblEmitente.FieldByName('NOME').AsString = 'NOME' do
+var
+  ThreadGravar:TCarregaEmitente;
 begin
 
-  dmDados.tblEmitente.Refresh;
-end;
 
-cxPageControl1.Enabled := true;
+  ThreadGravar := TCarregaEmitente.Create(true);
+  ThreadGravar.FreeOnTerminate := True;
+  ThreadGravar.Resume;
 
 end;
 
 procedure TfrmConfig.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     frmprincipal.TimeMonitor.Enabled := true;
+end;
+
+{ TCarregaEmitente }
+
+
+
+{ TCarregaEmitente }
+
+procedure TCarregaEmitente.Execute;
+begin
+  Priority := tpLower;
+
+    WinExec('C:\Kimmera Monitor\App\dados.exe',0);
+    ShowMessage('Para que as configurações tenham efeitos o sistema precisa ser reiniciado');
+
+
+  inherited;
+
 end;
 
 end.
