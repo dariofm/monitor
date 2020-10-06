@@ -70,7 +70,6 @@ var
   impressoras:TPrinter;
   ArquivoConfig: TIniFile;
 begin
-  //WinExec('C:\Kimmera Monitor\App\monitor.exe',0);
   impressoras:=TPrinter.Create;
   try
   for i := 0 to Printer.Printers. Count - 1 do

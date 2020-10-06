@@ -99,7 +99,6 @@ object frmPrincipal: TfrmPrincipal
     Height = 25
     Caption = 'Lista'
     TabOrder = 3
-    Visible = False
   end
   object TimeMonitor: TTimer
     OnTimer = TimeMonitorTimer

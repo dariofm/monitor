@@ -64,11 +64,9 @@ object dmDados: TdmDados
     end
     object qryNotaVALOR_UNITARIO: TFloatField
       FieldName = 'VALOR_UNITARIO'
-      currency = True
     end
     object qryNotaVALOR_TOTAL: TFloatField
       FieldName = 'VALOR_TOTAL'
-      currency = True
     end
     object qryNotaUSUARIO: TStringField
       FieldName = 'USUARIO'
