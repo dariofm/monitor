@@ -10,10 +10,11 @@ from funcoes import trataData
 
 
 config = configparser.RawConfigParser()
-config.read('C:\\Kimmera Monitor\\monitor.ini')
-#caixa = config.getint('TERMINAL', 'Caixa')
-
-
+config.read('C:\\Kimmera Monitor\\Configuracao.ini')
+tipoDoc = config.get('DOCUMENTO', 'TipoDoc')
+print('-----------------------------------------------------')
+print(tipoDoc)
+print('-----------------------------------------------------')
 conexao = firebirdsql.connect(user="SYSDBA",password="masterkey",database="C:\\Kimmera Monitor\\monitor.fdb",host="localhost",charset="ISO8859_1")
 
 
@@ -21,7 +22,6 @@ cursor = conexao.cursor()
 uteis = Uteis()
 configuracoes = Configuracoes()
 database = uteis.conexao
-
 
 #Inicialização das var
 ativo = True
@@ -48,7 +48,7 @@ def retornaProdutos(nota_num):
             produtos = ['Não há movimentação']
     return produtos
 
-query = {"_t.3":"NotaFiscalManual"}
+query = {"_t.3":tipoDoc}
 collection = {"Numero":1,"DataHoraEmissao":1,"NomeUsuario":1}
 while ativo == True:
     movimento = database["Movimentacoes"]
