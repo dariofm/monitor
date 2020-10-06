@@ -1,0 +1,5 @@
+instalar Serviços
+nssm install kimmera "dir\exe"
+
+remove serviço
+nssm remove kimmera
