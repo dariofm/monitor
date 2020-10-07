@@ -9,11 +9,6 @@ from funcoes import proximoNumero
 
 
 
-config = configparser.RawConfigParser()
-config.read('C:\\Kimmera Monitor\\monitor.ini')
-caixa = config.getint('TERMINAL', 'Caixa')
-
-
 conexao = firebirdsql.connect(user="SYSDBA",password="masterkey",database="C:\\Kimmera Monitor\\monitor.fdb",host="localhost",charset="ISO8859_1")
 
 cursor = conexao.cursor()
