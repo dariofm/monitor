@@ -21,14 +21,10 @@ type
     cxButton2: TcxButton;
     TimerMinimize: TTimer;
     ApplicationEvents1: TApplicationEvents;
-    TrayIcon1: TTrayIcon;
     procedure TimeMonitorTimer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure cxButton1Click(Sender: TObject);
     procedure cxCbUsuarioPropertiesCloseUp(Sender: TObject);
-    procedure ApplicationEvents1Minimize(Sender: TObject);
-    procedure TrayIcon1DblClick(Sender: TObject);
-    procedure TimerMinimizeTimer(Sender: TObject);
   private
     { Private declarations }
   public
@@ -44,20 +40,6 @@ implementation
 {$R *.dfm}
 
 uses udmDados, ufrmConfig;
-
-procedure TfrmPrincipal.ApplicationEvents1Minimize(Sender: TObject);
-begin
-
-  Self.Hide();
-
-  Self.WindowState := wsMinimized;
-  TrayIcon1.Visible := True;
-  TrayIcon1.Animate := True;
-  TrayIcon1.ShowBalloonHint;
-
-  TimerMinimize.Enabled := false;
-
-end;
 
 procedure TfrmPrincipal.cxButton1Click(Sender: TObject);
 begin
@@ -209,23 +191,5 @@ begin
   SetWindowPos(frmPrincipal.handle, HWND_NOTOPMOST, frmPrincipal.Left, frmPrincipal.Top,frmPrincipal.Width, frmPrincipal.Height, 0);
   end;
 
-
-procedure TfrmPrincipal.TimerMinimizeTimer(Sender: TObject);
-begin
-  Self.Hide();
-  Self.WindowState := wsMinimized;
-  TrayIcon1.Visible := True;
-  TrayIcon1.Animate := True;
-  TrayIcon1.ShowBalloonHint;
-  TimerMinimize.Enabled := false;
-end;
-
-procedure TfrmPrincipal.TrayIcon1DblClick(Sender: TObject);
-begin
-  TrayIcon1.Visible := False;
-  Show();
-  WindowState := wsNormal;
-  Application.BringToFront();
-end;
 
 end.

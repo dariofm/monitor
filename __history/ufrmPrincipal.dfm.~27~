@@ -108,17 +108,14 @@ object frmPrincipal: TfrmPrincipal
   end
   object TimerMinimize: TTimer
     Interval = 500
-    OnTimer = TimerMinimizeTimer
     Left = 328
     Top = 8
   end
   object ApplicationEvents1: TApplicationEvents
-    OnMinimize = ApplicationEvents1Minimize
     Left = 464
     Top = 184
   end
   object TrayIcon1: TTrayIcon
-    OnDblClick = TrayIcon1DblClick
     Left = 544
     Top = 192
   end

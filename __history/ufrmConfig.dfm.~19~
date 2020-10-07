@@ -48,6 +48,7 @@ object frmConfig: TfrmConfig
     object cxTabSheet1: TcxTabSheet
       Caption = 'Monitor'
       ImageIndex = 0
+      ExplicitTop = 25
       object Label4: TLabel
         Left = 8
         Top = 8
@@ -83,14 +84,6 @@ object frmConfig: TfrmConfig
         Font.Name = 'Tahoma'
         Font.Style = [fsBold]
         ParentFont = False
-      end
-      object Label2: TLabel
-        Left = 216
-        Top = 8
-        Width = 92
-        Height = 13
-        Caption = 'Tipo de Documento'
-        Visible = False
       end
       object cxBoxImpressora: TcxComboBox
         Left = 8
@@ -303,14 +296,6 @@ object frmConfig: TfrmConfig
         OnClick = cxButton3Click
       end
     end
-  end
-  object cxComboBox1: TcxComboBox
-    Left = 216
-    Top = 51
-    TabOrder = 2
-    Text = 'NotaFiscalManual'
-    Visible = False
-    Width = 121
   end
   object frxDBDatasetCupom: TfrxDBDataset
     UserName = 'cupom'

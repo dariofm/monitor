@@ -59,8 +59,6 @@ type
     Label14: TLabel;
     cxButton4: TcxButton;
     Label15: TLabel;
-    cxComboBox1: TcxComboBox;
-    Label2: TLabel;
     procedure cxButton1Click(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);

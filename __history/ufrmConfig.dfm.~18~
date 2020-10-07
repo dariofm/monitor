@@ -12,6 +12,8 @@ object frmConfig: TfrmConfig
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object Shape1: TShape
@@ -38,14 +40,15 @@ object frmConfig: TfrmConfig
     Height = 257
     Align = alTop
     TabOrder = 1
-    Properties.ActivePage = cxTabSheet2
+    Properties.ActivePage = cxTabSheet1
     Properties.CustomButtons.Buttons = <>
     ClientRectBottom = 257
     ClientRectRight = 661
     ClientRectTop = 24
     object cxTabSheet1: TcxTabSheet
-      Caption = 'Impresora'
+      Caption = 'Monitor'
       ImageIndex = 0
+      ExplicitTop = 25
       object Label4: TLabel
         Left = 8
         Top = 8
@@ -63,11 +66,41 @@ object frmConfig: TfrmConfig
       end
       object Label2: TLabel
         Left = 89
-        Top = 93
+        Top = 214
         Width = 257
         Height = 13
         Caption = 'Tempo de Monitoramento do Banco ERP em segundos'
         Transparent = True
+        Visible = False
+      end
+      object Label13: TLabel
+        Left = 520
+        Top = 8
+        Width = 111
+        Height = 13
+        Caption = #218'ltima Nota Manual Erp'
+        Visible = False
+      end
+      object Label14: TLabel
+        Left = 8
+        Top = 115
+        Width = 153
+        Height = 13
+        Caption = 'Pedir confirma'#231#227'o de Impress'#227'o'
+        Transparent = True
+      end
+      object Label15: TLabel
+        Left = 127
+        Top = 166
+        Width = 190
+        Height = 13
+        Caption = 'Exige previl'#233'gio de Administrador'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlue
+        Font.Height = -11
+        Font.Name = 'Tahoma'
+        Font.Style = [fsBold]
+        ParentFont = False
       end
       object cxBoxImpressora: TcxComboBox
         Left = 8
@@ -86,24 +119,56 @@ object frmConfig: TfrmConfig
         TabOrder = 1
         Value = 1
       end
-      object SpinEdit1: TSpinEdit
+      object SpinErp: TSpinEdit
         Left = 8
-        Top = 84
+        Top = 205
         Width = 75
         Height = 22
         MaxValue = 999
         MinValue = 1
         TabOrder = 2
         Value = 1
+        Visible = False
       end
       object cxButton2: TcxButton
         Left = 8
-        Top = 112
+        Top = 84
         Width = 113
         Height = 25
         Caption = 'Editor de Impresso'
         TabOrder = 3
         OnClick = cxButton2Click
+      end
+      object cxDBSpinEdit1: TcxDBSpinEdit
+        Left = 520
+        Top = 27
+        DataBinding.DataField = 'CONTROLE'
+        DataBinding.DataSource = DataSource2
+        Properties.ImmediatePost = True
+        Properties.MinValue = 1.000000000000000000
+        TabOrder = 4
+        Visible = False
+        Width = 121
+      end
+      object cxCbConfirmImp: TcxComboBox
+        Left = 8
+        Top = 134
+        Properties.DropDownListStyle = lsEditFixedList
+        Properties.Items.Strings = (
+          'Sim'
+          'N'#227'o')
+        TabOrder = 5
+        Text = 'Sim'
+        Width = 121
+      end
+      object cxButton4: TcxButton
+        Left = 8
+        Top = 161
+        Width = 113
+        Height = 25
+        Caption = 'Instalar Servi'#231'o'
+        TabOrder = 6
+        OnClick = cxButton4Click
       end
     end
     object cxTabSheet2: TcxTabSheet
@@ -111,7 +176,7 @@ object frmConfig: TfrmConfig
       ImageIndex = 1
       object Label3: TLabel
         Left = 8
-        Top = 0
+        Top = 13
         Width = 29
         Height = 13
         Caption = 'NOME'
@@ -119,7 +184,7 @@ object frmConfig: TfrmConfig
       end
       object Label5: TLabel
         Left = 8
-        Top = 40
+        Top = 53
         Width = 79
         Height = 13
         Caption = 'NOMEFANTASIA'
@@ -127,7 +192,7 @@ object frmConfig: TfrmConfig
       end
       object Label6: TLabel
         Left = 8
-        Top = 80
+        Top = 93
         Width = 50
         Height = 13
         Caption = 'TELEFONE'
@@ -135,7 +200,7 @@ object frmConfig: TfrmConfig
       end
       object Label7: TLabel
         Left = 111
-        Top = 80
+        Top = 93
         Width = 25
         Height = 13
         Caption = 'CNPJ'
@@ -143,7 +208,7 @@ object frmConfig: TfrmConfig
       end
       object Label8: TLabel
         Left = 8
-        Top = 123
+        Top = 136
         Width = 54
         Height = 13
         Caption = 'ENDERECO'
@@ -151,7 +216,7 @@ object frmConfig: TfrmConfig
       end
       object Label9: TLabel
         Left = 281
-        Top = 126
+        Top = 139
         Width = 43
         Height = 13
         Caption = 'NUMERO'
@@ -159,7 +224,7 @@ object frmConfig: TfrmConfig
       end
       object Label10: TLabel
         Left = 330
-        Top = 126
+        Top = 139
         Width = 39
         Height = 13
         Caption = 'BAIRRO'
@@ -167,7 +232,7 @@ object frmConfig: TfrmConfig
       end
       object Label11: TLabel
         Left = 456
-        Top = 126
+        Top = 139
         Width = 19
         Height = 13
         Caption = 'CEP'
@@ -175,15 +240,22 @@ object frmConfig: TfrmConfig
       end
       object Label12: TLabel
         Left = 535
-        Top = 126
+        Top = 139
         Width = 38
         Height = 13
         Caption = 'CIDADE'
         FocusControl = cxDBTextEdit9
       end
+      object lblsStatus: TLabel
+        Left = 84
+        Top = 214
+        Width = 161
+        Height = 13
+        AutoSize = False
+      end
       object cxDBTextEdit1: TcxDBTextEdit
         Left = 8
-        Top = 16
+        Top = 29
         DataBinding.DataField = 'NOME'
         DataBinding.DataSource = DataSource1
         TabOrder = 0
@@ -191,7 +263,7 @@ object frmConfig: TfrmConfig
       end
       object cxDBTextEdit2: TcxDBTextEdit
         Left = 8
-        Top = 56
+        Top = 69
         DataBinding.DataField = 'NOMEFANTASIA'
         DataBinding.DataSource = DataSource1
         TabOrder = 1
@@ -199,7 +271,7 @@ object frmConfig: TfrmConfig
       end
       object cxDBTextEdit3: TcxDBTextEdit
         Left = 8
-        Top = 96
+        Top = 109
         DataBinding.DataField = 'TELEFONE'
         DataBinding.DataSource = DataSource1
         TabOrder = 2
@@ -207,7 +279,7 @@ object frmConfig: TfrmConfig
       end
       object cxDBTextEdit4: TcxDBTextEdit
         Left = 111
-        Top = 96
+        Top = 109
         DataBinding.DataField = 'CNPJ'
         DataBinding.DataSource = DataSource1
         TabOrder = 3
@@ -215,7 +287,7 @@ object frmConfig: TfrmConfig
       end
       object cxDBTextEdit5: TcxDBTextEdit
         Left = 8
-        Top = 142
+        Top = 155
         DataBinding.DataField = 'ENDERECO'
         DataBinding.DataSource = DataSource1
         TabOrder = 4
@@ -223,7 +295,7 @@ object frmConfig: TfrmConfig
       end
       object cxDBTextEdit6: TcxDBTextEdit
         Left = 281
-        Top = 142
+        Top = 155
         DataBinding.DataField = 'NUMERO'
         DataBinding.DataSource = DataSource1
         TabOrder = 5
@@ -231,7 +303,7 @@ object frmConfig: TfrmConfig
       end
       object cxDBTextEdit7: TcxDBTextEdit
         Left = 330
-        Top = 142
+        Top = 155
         DataBinding.DataField = 'BAIRRO'
         DataBinding.DataSource = DataSource1
         TabOrder = 6
@@ -239,7 +311,7 @@ object frmConfig: TfrmConfig
       end
       object cxDBTextEdit8: TcxDBTextEdit
         Left = 456
-        Top = 142
+        Top = 155
         DataBinding.DataField = 'CEP'
         DataBinding.DataSource = DataSource1
         TabOrder = 7
@@ -247,15 +319,15 @@ object frmConfig: TfrmConfig
       end
       object cxDBTextEdit9: TcxDBTextEdit
         Left = 535
-        Top = 142
+        Top = 155
         DataBinding.DataField = 'CIDADE'
         DataBinding.DataSource = DataSource1
         TabOrder = 8
         Width = 121
       end
       object cxButton3: TcxButton
-        Left = 8
-        Top = 176
+        Left = 583
+        Top = 3
         Width = 75
         Height = 25
         Caption = 'Carregar'
@@ -269,18 +341,50 @@ object frmConfig: TfrmConfig
     CloseDataSource = False
     DataSource = dmDados.dsNota
     BCDToCurrency = False
-    Left = 440
-    Top = 8
+    Left = 456
+    Top = 80
   end
   object DataSource1: TDataSource
     DataSet = dmDados.tblEmitente
-    Left = 216
-    Top = 224
+    Left = 560
+    Top = 192
   end
   object TimerAtualizaCadastro: TTimer
     Enabled = False
     Interval = 20000
-    Left = 328
-    Top = 152
+    Left = 592
+    Top = 88
+  end
+  object frxDesigner1: TfrxDesigner
+    DefaultScriptLanguage = 'PascalScript'
+    DefaultFont.Charset = DEFAULT_CHARSET
+    DefaultFont.Color = clWindowText
+    DefaultFont.Height = -13
+    DefaultFont.Name = 'Arial'
+    DefaultFont.Style = []
+    DefaultLeftMargin = 10.000000000000000000
+    DefaultRightMargin = 10.000000000000000000
+    DefaultTopMargin = 10.000000000000000000
+    DefaultBottomMargin = 10.000000000000000000
+    DefaultPaperSize = 9
+    DefaultOrientation = poPortrait
+    GradientEnd = 11982554
+    GradientStart = clWindow
+    TemplatesExt = 'fr3'
+    Restrictions = []
+    RTLLanguage = False
+    MemoParentFont = False
+    Left = 520
+    Top = 80
+  end
+  object DataSource2: TDataSource
+    DataSet = dmDados.tblParam
+    Left = 480
+    Top = 192
+  end
+  object DataSource3: TDataSource
+    DataSet = dmDados.tblParam
+    Left = 488
+    Top = 200
   end
 end

@@ -12,9 +12,7 @@ from funcoes import trataData
 config = configparser.RawConfigParser()
 config.read('C:\\Kimmera Monitor\\Configuracao.ini')
 tipoDoc = config.get('DOCUMENTO', 'TipoDoc')
-print('-----------------------------------------------------')
-print(tipoDoc)
-print('-----------------------------------------------------')
+
 conexao = firebirdsql.connect(user="SYSDBA",password="masterkey",database="C:\\Kimmera Monitor\\monitor.fdb",host="localhost",charset="ISO8859_1")
 
 
