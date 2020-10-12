@@ -3,7 +3,7 @@ object frmConfig: TfrmConfig
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Configura'#231#227'o'
-  ClientHeight = 294
+  ClientHeight = 302
   ClientWidth = 661
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,15 +18,16 @@ object frmConfig: TfrmConfig
   TextHeight = 13
   object Shape1: TShape
     Left = 0
-    Top = 257
+    Top = 263
     Width = 661
     Height = 1
     Align = alTop
+    ExplicitTop = 257
     ExplicitWidth = 580
   end
   object cxButton1: TcxButton
     Left = 8
-    Top = 264
+    Top = 269
     Width = 75
     Height = 25
     Caption = 'Gravar'
@@ -37,17 +38,18 @@ object frmConfig: TfrmConfig
     Left = 0
     Top = 0
     Width = 661
-    Height = 257
+    Height = 263
     Align = alTop
     TabOrder = 1
     Properties.ActivePage = cxTabSheet1
     Properties.CustomButtons.Buttons = <>
-    ClientRectBottom = 257
+    ClientRectBottom = 263
     ClientRectRight = 661
     ClientRectTop = 24
     object cxTabSheet1: TcxTabSheet
       Caption = 'Monitor'
       ImageIndex = 0
+      ExplicitHeight = 234
       object Label4: TLabel
         Left = 8
         Top = 8
@@ -56,8 +58,8 @@ object frmConfig: TfrmConfig
         Caption = 'Impressora'
       end
       object Label1: TLabel
-        Left = 89
-        Top = 65
+        Left = 92
+        Top = 106
         Width = 254
         Height = 13
         Caption = 'Tempo de Monitoramento de impress'#227'o em segundos'
@@ -65,15 +67,15 @@ object frmConfig: TfrmConfig
       end
       object Label14: TLabel
         Left = 8
-        Top = 115
+        Top = 156
         Width = 153
         Height = 13
         Caption = 'Pedir confirma'#231#227'o de Impress'#227'o'
         Transparent = True
       end
       object Label15: TLabel
-        Left = 127
-        Top = 166
+        Left = 130
+        Top = 207
         Width = 190
         Height = 13
         Caption = 'Exige previl'#233'gio de Administrador'
@@ -92,6 +94,13 @@ object frmConfig: TfrmConfig
         Caption = 'Tipo de Documento'
         Visible = False
       end
+      object Label13: TLabel
+        Left = 8
+        Top = 51
+        Width = 60
+        Height = 13
+        Caption = 'Restaurante'
+      end
       object cxBoxImpressora: TcxComboBox
         Left = 8
         Top = 27
@@ -101,7 +110,7 @@ object frmConfig: TfrmConfig
       end
       object SpinTempo: TSpinEdit
         Left = 8
-        Top = 56
+        Top = 97
         Width = 75
         Height = 22
         MaxValue = 999
@@ -111,7 +120,7 @@ object frmConfig: TfrmConfig
       end
       object cxButton2: TcxButton
         Left = 8
-        Top = 84
+        Top = 125
         Width = 113
         Height = 25
         Caption = 'Editor de Impresso'
@@ -120,7 +129,7 @@ object frmConfig: TfrmConfig
       end
       object cxCbConfirmImp: TcxComboBox
         Left = 8
-        Top = 134
+        Top = 175
         Properties.DropDownListStyle = lsEditFixedList
         Properties.Items.Strings = (
           'Sim'
@@ -131,17 +140,25 @@ object frmConfig: TfrmConfig
       end
       object cxButton4: TcxButton
         Left = 8
-        Top = 161
+        Top = 202
         Width = 113
         Height = 25
         Caption = 'Instalar Servi'#231'o'
         TabOrder = 4
         OnClick = cxButton4Click
       end
+      object cxBoxImpressoraRestaurante: TcxComboBox
+        Left = 8
+        Top = 70
+        TabOrder = 5
+        Text = 'cxBoxImpressoraRestaurante'
+        Width = 202
+      end
     end
     object cxTabSheet2: TcxTabSheet
       Caption = 'Dados ERP'
       ImageIndex = 1
+      ExplicitHeight = 233
       object Label3: TLabel
         Left = 8
         Top = 13
@@ -362,5 +379,26 @@ object frmConfig: TfrmConfig
     DataSet = dmDados.tblParam
     Left = 488
     Top = 200
+  end
+  object frxDBDatasetCozinh: TfrxDBDataset
+    UserName = 'Cozinha'
+    CloseDataSource = False
+    FieldAliases.Strings = (
+      'ID=ID'
+      'NUMERO=NUMERO'
+      'EMISSAO=EMISSAO'
+      'CODIGOINTERNO=CODIGOINTERNO'
+      'DESCRICAO=DESCRICAO'
+      'UND=UND'
+      'QTD=QTD'
+      'VALOR_UNITARIO=VALOR_UNITARIO'
+      'VALOR_TOTAL=VALOR_TOTAL'
+      'USUARIO=USUARIO'
+      'IMPRESSO=IMPRESSO'
+      'OBS=OBS')
+    DataSource = dmDados.dsRestaurante
+    BCDToCurrency = False
+    Left = 448
+    Top = 152
   end
 end

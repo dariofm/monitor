@@ -40,8 +40,6 @@ type
     qryNotaVALOR_TOTAL: TFloatField;
     qryNotaUSUARIO: TStringField;
     qryNotaIMPRESSO: TIntegerField;
-    qryRestaurante: TUniQuery;
-    dsRestaurante: TUniDataSource;
   private
     { Private declarations }
   public

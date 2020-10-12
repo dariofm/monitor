@@ -1,6 +1,6 @@
 object dmDados: TdmDados
   OldCreateOrder = False
-  Height = 263
+  Height = 383
   Width = 655
   object uniConection: TUniConnection
     ProviderName = 'InterBase'
@@ -19,7 +19,7 @@ object dmDados: TdmDados
   object qryNota: TUniQuery
     Connection = uniConection
     SQL.Strings = (
-      'select * from nota_manual where caixa = :p0 AND impresso = :p1')
+      'select * from nota_manual where usuario = :p0 AND impresso = :p1')
     Active = True
     Left = 56
     Top = 72
@@ -34,6 +34,48 @@ object dmDados: TdmDados
         Name = 'p1'
         Value = nil
       end>
+    object qryNotaID: TIntegerField
+      FieldName = 'ID'
+      Required = True
+    end
+    object qryNotaITEM: TIntegerField
+      FieldName = 'ITEM'
+    end
+    object qryNotaNUMERO: TIntegerField
+      FieldName = 'NUMERO'
+    end
+    object qryNotaEMISSAO: TDateField
+      FieldName = 'EMISSAO'
+    end
+    object qryNotaCODIGOINTERNO: TIntegerField
+      FieldName = 'CODIGOINTERNO'
+      DisplayFormat = '000000'
+    end
+    object qryNotaDESCRICAO: TStringField
+      FieldName = 'DESCRICAO'
+      Size = 100
+    end
+    object qryNotaUND: TStringField
+      FieldName = 'UND'
+      Size = 4
+    end
+    object qryNotaQTD: TFloatField
+      FieldName = 'QTD'
+    end
+    object qryNotaVALOR_UNITARIO: TFloatField
+      FieldName = 'VALOR_UNITARIO'
+      currency = True
+    end
+    object qryNotaVALOR_TOTAL: TFloatField
+      FieldName = 'VALOR_TOTAL'
+      currency = True
+    end
+    object qryNotaUSUARIO: TStringField
+      FieldName = 'USUARIO'
+    end
+    object qryNotaIMPRESSO: TIntegerField
+      FieldName = 'IMPRESSO'
+    end
   end
   object dsNota: TUniDataSource
     DataSet = qryNota
@@ -49,10 +91,10 @@ object dmDados: TdmDados
     Connection = uniConection
     SQL.Strings = (
       
-        'select max(numero) from nota_manual where caixa = :p0 AND impres' +
-        'so = :p1')
+        'select max(numero) from nota_manual where usuario = :p0 AND impr' +
+        'esso = :p1')
     Left = 56
-    Top = 192
+    Top = 208
     ParamData = <
       item
         DataType = ftUnknown
@@ -65,9 +107,9 @@ object dmDados: TdmDados
         Value = nil
       end>
   end
-  object frxReport1: TfrxReport
+  object frxReportCupom: TfrxReport
     Tag = 1
-    Version = '5.3.16'
+    Version = '5.2.3'
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
@@ -75,7 +117,7 @@ object dmDados: TdmDados
     PrintOptions.Printer = 'Daruma DR700 Spooler'
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 44004.729229872700000000
-    ReportOptions.LastChange = 44105.989733344900000000
+    ReportOptions.LastChange = 44108.424567557870000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       'begin'
@@ -88,7 +130,7 @@ object dmDados: TdmDados
     Top = 8
     Datasets = <
       item
-        DataSet = frxDBDatasetCupom
+        DataSet = frmConfig.frxDBDatasetCupom
         DataSetName = 'cupom'
       end>
     Variables = <
@@ -177,25 +219,11 @@ object dmDados: TdmDados
             '[Nome_Endereco]')
           ParentFont = False
         end
-        object Numero: TfrxMemoView
-          Left = 49.133890000000000000
-          Top = 37.795300000000000000
-          Width = 68.031540000000000000
-          Height = 18.897650000000000000
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Courier New'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[Numero]')
-          ParentFont = False
-        end
         object Memo6: TfrxMemoView
           Left = 3.779530000000000000
           Top = 37.795300000000000000
           Width = 49.133890000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
@@ -205,97 +233,101 @@ object dmDados: TdmDados
             'Pedido:')
           ParentFont = False
         end
+        object Numero: TfrxMemoView
+          Left = 52.913420000000000000
+          Top = 37.795300000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Courier New'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[Numero]')
+          ParentFont = False
+        end
       end
       object MasterData1: TfrxMasterData
         FillType = ftBrush
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
-        Font.Height = -9
-        Font.Name = 'Arial'
+        Font.Height = -11
+        Font.Name = 'Courier New'
         Font.Style = []
-        Height = 26.456710000000000000
+        Height = 23.055125430000000000
         ParentFont = False
         Top = 181.417440000000000000
         Width = 272.126160000000000000
-        DataSet = frxDBDatasetCupom
+        DataSet = frmConfig.frxDBDatasetCupom
         DataSetName = 'cupom'
         RowCount = 0
-        object dataSetItemDESCRICAO: TfrxMemoView
-          Left = 49.133890000000000000
-          Width = 215.433210000000000000
-          Height = 15.118110240000000000
-          DataSetName = 'dataSetItem'
+        object cupomDESCRICAO: TfrxMemoView
+          Width = 257.008040000000000000
+          Height = 11.716535430000000000
+          DataField = 'DESCRICAO'
+          DataSet = frmConfig.frxDBDatasetCupom
+          DataSetName = 'cupom'
+          Memo.UTF8W = (
+            '[cupom."DESCRICAO"]')
+        end
+        object cupomQTD: TfrxMemoView
+          Left = 170.078850000000000000
+          Top = 11.338590000000000000
+          Width = 37.795300000000000000
+          Height = 11.716535430000000000
+          DataField = 'QTD'
+          DataSet = frmConfig.frxDBDatasetCupom
+          DataSetName = 'cupom'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Courier New'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[cupom."QTD"]')
+          ParentFont = False
+        end
+        object cupomVALOR_UNITARIO: TfrxMemoView
+          Left = 83.149660000000000000
+          Top = 11.338590000000000000
+          Width = 86.929190000000000000
+          Height = 11.716535430000000000
+          DataField = 'VALOR_UNITARIO'
+          DataSet = frmConfig.frxDBDatasetCupom
+          DataSetName = 'cupom'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
           Font.Name = 'courier New'
           Font.Style = []
+          HAlign = haRight
           Memo.UTF8W = (
-            '[dataSetItem."DESCRICAO"]')
+            '[cupom."VALOR_UNITARIO"]')
           ParentFont = False
         end
-        object dataSetItemCODIGO: TfrxMemoView
-          Width = 49.133890000000000000
-          Height = 15.118110240000000000
-          DataSetName = 'dataSetItem'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Courier New'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[dataSetItem."CODIGOINTERNO"]')
-          ParentFont = False
-        end
-        object dataSetItemQTD: TfrxMemoView
-          Left = 170.078850000000000000
+        object cupomVALOR_TOTAL: TfrxMemoView
+          Left = 185.196970000000000000
           Top = 11.338590000000000000
-          Width = 45.354360000000000000
-          Height = 15.118112680000000000
-          DataSetName = 'dataSetItem'
+          Width = 79.370130000000000000
+          Height = 11.716535430000000000
+          DataField = 'VALOR_TOTAL'
+          DataSet = frmConfig.frxDBDatasetCupom
+          DataSetName = 'cupom'
           DisplayFormat.FormatStr = '%2.2n'
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
           Font.Height = -11
-          Font.Name = 'Courier New'
+          Font.Name = 'courier New'
           Font.Style = []
+          HAlign = haRight
           Memo.UTF8W = (
-            '[dataSetItem."QTD"]')
-          ParentFont = False
-        end
-        object dataSetItemVALOR_TOTAL: TfrxMemoView
-          Left = 215.433210000000000000
-          Top = 11.338590000000000000
-          Width = 56.692950000000000000
-          Height = 15.118112680000000000
-          DataSetName = 'dataSetItem'
-          DisplayFormat.FormatStr = '%2.2n'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Courier New'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[dataSetItem."VALOR_TOTAL"]')
-          ParentFont = False
-        end
-        object dataSetItemVALOR_UNITA1: TfrxMemoView
-          Left = 105.826840000000000000
-          Top = 11.338590000000000000
-          Width = 52.913420000000000000
-          Height = 15.118112680000000000
-          DataSetName = 'dataSetItem'
-          DisplayFormat.FormatStr = '%2.2n'
-          DisplayFormat.Kind = fkNumeric
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Courier New'
-          Font.Style = []
-          Memo.UTF8W = (
-            '[dataSetItem."VALOR_UNITARIO"]')
+            '[cupom."VALOR_TOTAL"]')
           ParentFont = False
         end
       end
@@ -381,12 +413,12 @@ object dmDados: TdmDados
         FillType = ftBrush
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
-        Font.Height = -13
+        Font.Height = -11
         Font.Name = 'Courier New'
         Font.Style = []
         Height = 196.535560000000000000
         ParentFont = False
-        Top = 268.346630000000000000
+        Top = 264.567100000000000000
         Width = 272.126160000000000000
         object Shape2: TfrxShapeView
           Width = 268.346630000000000000
@@ -461,7 +493,7 @@ object dmDados: TdmDados
         end
         object Memo12: TfrxMemoView
           Left = 7.559060000000000000
-          Top = 7.559060000000000000
+          Top = 3.779530000000000000
           Width = 151.181200000000000000
           Height = 15.118120000000000000
           Font.Charset = DEFAULT_CHARSET
@@ -472,23 +504,6 @@ object dmDados: TdmDados
           HAlign = haRight
           Memo.UTF8W = (
             'Total:')
-          ParentFont = False
-        end
-        object dataSetEmitenteVALOR_TOT_NOTA: TfrxMemoView
-          Left = 170.078850000000000000
-          Top = 7.559060000000000000
-          Width = 86.929190000000000000
-          Height = 15.118112680000000000
-          DataField = 'VALOR_TOT_NOTA'
-          DataSetName = 'dataSetEmitente'
-          Font.Charset = DEFAULT_CHARSET
-          Font.Color = clBlack
-          Font.Height = -11
-          Font.Name = 'Courier New'
-          Font.Style = []
-          HAlign = haRight
-          Memo.UTF8W = (
-            '[dataSetEmitente."VALOR_TOT_NOTA"]')
           ParentFont = False
         end
         object Line1: TfrxLineView
@@ -522,15 +537,109 @@ object dmDados: TdmDados
           Memo.UTF8W = (
             '[obs]')
         end
+        object cupomVALOR_TOTAL1: TfrxMemoView
+          Left = 166.299320000000000000
+          Top = 3.779530000000000000
+          Width = 98.267780000000000000
+          Height = 15.118110236220500000
+          DataSet = frmConfig.frxDBDatasetCupom
+          DataSetName = 'cupom'
+          DisplayFormat.FormatStr = '%2.2n'
+          DisplayFormat.Kind = fkNumeric
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -12
+          Font.Name = 'Courier New'
+          Font.Style = []
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[SUM(<cupom."VALOR_TOTAL">,MasterData1)]')
+          ParentFont = False
+        end
       end
     end
   end
-  object frxDBDatasetCupom: TfrxDBDataset
-    UserName = 'cupom'
-    CloseDataSource = False
-    DataSource = dsNota
-    BCDToCurrency = False
-    Left = 440
-    Top = 8
+  object tblEmitente: TUniTable
+    TableName = 'EMITENTE'
+    Connection = uniConection
+    Active = True
+    Left = 352
+    Top = 80
+    object tblEmitenteNOME: TStringField
+      FieldName = 'NOME'
+      Size = 100
+    end
+    object tblEmitenteNOMEFANTASIA: TStringField
+      FieldName = 'NOMEFANTASIA'
+      Size = 100
+    end
+    object tblEmitenteTELEFONE: TStringField
+      FieldName = 'TELEFONE'
+      Size = 15
+    end
+    object tblEmitenteCNPJ: TStringField
+      FieldName = 'CNPJ'
+      Size = 15
+    end
+    object tblEmitenteENDERECO: TStringField
+      FieldName = 'ENDERECO'
+      Size = 40
+    end
+    object tblEmitenteNUMERO: TStringField
+      FieldName = 'NUMERO'
+      Size = 10
+    end
+    object tblEmitenteBAIRRO: TStringField
+      FieldName = 'BAIRRO'
+      Size = 40
+    end
+    object tblEmitenteCEP: TStringField
+      FieldName = 'CEP'
+      Size = 9
+    end
+    object tblEmitenteCIDADE: TStringField
+      FieldName = 'CIDADE'
+      Size = 40
+    end
+  end
+  object tblParam: TUniTable
+    TableName = 'PARAM'
+    Connection = uniConection
+    Active = True
+    Left = 352
+    Top = 136
+    object tblParamCONTROLE: TIntegerField
+      FieldName = 'CONTROLE'
+    end
+  end
+  object tblUsuario: TUniTable
+    TableName = 'USUARIO'
+    Connection = uniConection
+    Active = True
+    Left = 352
+    Top = 200
+  end
+  object qryRestaurante: TUniQuery
+    Connection = uniConection
+    SQL.Strings = (
+      'select * from restaurante where usuario = :p0 AND impresso = :p1')
+    Left = 56
+    Top = 280
+    ParamData = <
+      item
+        DataType = ftUnknown
+        Name = 'p0'
+        Value = nil
+      end
+      item
+        DataType = ftUnknown
+        Name = 'p1'
+        Value = nil
+      end>
+  end
+  object dsRestaurante: TUniDataSource
+    DataSet = qryRestaurante
+    Left = 128
+    Top = 288
   end
 end

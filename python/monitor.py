@@ -11,8 +11,8 @@ from funcoes import trataData
 
 config = configparser.RawConfigParser()
 config.read('C:\\Kimmera Monitor\\Configuracao.ini')
-tipoDoc = config.get('DOCUMENTO', 'TipoDoc')
-
+usuario = config.get('Parametro', 'Usuario')
+tipoDoc = config.get('Documento', 'TipoDoc')
 conexao = firebirdsql.connect(user="SYSDBA",password="masterkey",database="C:\\Kimmera Monitor\\monitor.fdb",host="localhost",charset="ISO8859_1")
 
 
@@ -21,7 +21,17 @@ uteis = Uteis()
 configuracoes = Configuracoes()
 database = uteis.conexao
 
+
+
+
+mesa = database["ItensMesaConta"]
+item = 0
+
+
+
+
 #Inicialização das var
+ultimo_numero = 0
 ativo = True
 produtos = []
 #Retorna produtos vendidos no Nota Manual 
@@ -49,11 +59,15 @@ def retornaProdutos(nota_num):
 query = {"_t.3":tipoDoc}
 collection = {"Numero":1,"DataHoraEmissao":1,"NomeUsuario":1}
 while ativo == True:
+
     movimento = database["Movimentacoes"]
     for i in movimento.find(query,collection).sort("Numero",-1).limit(1):
-        ultimo_numero = i["Numero"]
-        emissao = "'"+trataData(i["DataHoraEmissao"])+"'"
-        usuario = "'"+i["NomeUsuario"]+"'"
+        try:
+            ultimo_numero = i["Numero"]
+            emissao = "'"+trataData(i["DataHoraEmissao"])+"'"
+            usuario = "'"+i["NomeUsuario"]+"'"
+        except:
+            ultimo_numero = 0
     cursor.execute('select controle from param')
     resultado = cursor.fetchall()
     controle = 0
@@ -101,4 +115,3 @@ while ativo == True:
         cursor.execute('update param set controle = %s'%(ultimo_numero))
         conexao.commit()
     time.sleep(0.01)
-

@@ -61,6 +61,9 @@ type
     Label15: TLabel;
     cxComboBox1: TcxComboBox;
     Label2: TLabel;
+    cxBoxImpressoraRestaurante: TcxComboBox;
+    Label13: TLabel;
+    frxDBDatasetCozinh: TfrxDBDataset;
     procedure cxButton1Click(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
@@ -91,7 +94,8 @@ begin
     // Grava os dados no arquivo "Config.ini"
     ArqINI.WriteString('Parametro', 'Intervalo', SpinTempo.Text);
     //ArqINI.WriteString('Parametro', 'IntervaloErp', SpinErp.Text);
-    ArqINI.WriteString('Parametro', 'Impressora', cxBoxImpressora.Text);
+    ArqINI.WriteString('Parametro', 'Impressora1', cxBoxImpressora.Text);
+    ArqINI.WriteString('Parametro', 'Impressora2', cxBoxImpressoraRestaurante.Text);
     ArqINI.WriteString('Parametro', 'AutoImp', cxCbConfirmImp.Text);
   finally
     // Liberar a referência do arquivo da memória
@@ -120,7 +124,7 @@ end;
 procedure TfrmConfig.cxButton2Click(Sender: TObject);
 begin
   dmDados.frxReportCupom.clear;
-  dmDados.frxReportCupom.LoadFromFile('C:\Kimmera Monitor\CupomMei.fr3');
+  dmDados.frxReportCupom.LoadFromFile('C:\Kimmera Monitor\notamanual.fr3');
   dmDados.frxReportCupom.DesignReport;
 end;
 

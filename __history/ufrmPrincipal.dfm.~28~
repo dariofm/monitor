@@ -3,7 +3,7 @@ object frmPrincipal: TfrmPrincipal
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Monitor de Impressora'
-  ClientHeight = 365
+  ClientHeight = 307
   ClientWidth = 666
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -18,34 +18,34 @@ object frmPrincipal: TfrmPrincipal
   TextHeight = 13
   object lblUltimaNota: TLabel
     Left = 8
-    Top = 5
+    Top = 8
     Width = 62
     Height = 13
     Caption = #218'ltima Nota: '
   end
   object lblStatus: TLabel
     Left = 8
-    Top = 24
+    Top = 27
     Width = 38
     Height = 13
     Caption = 'Status: '
   end
   object cxButton1: TcxButton
     Left = 550
-    Top = 13
+    Top = 16
     Width = 108
     Height = 25
     Caption = 'Configura'#231#227'o'
-    TabOrder = 1
+    TabOrder = 0
     OnClick = cxButton1Click
   end
   object DBGrid1: TDBGrid
     Left = 8
-    Top = 75
+    Top = 88
     Width = 650
-    Height = 134
+    Height = 211
     DataSource = dmDados.dsNota
-    TabOrder = 0
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -86,7 +86,7 @@ object frmPrincipal: TfrmPrincipal
   end
   object cxCbUsuario: TcxComboBox
     Left = 8
-    Top = 43
+    Top = 61
     Properties.OnCloseUp = cxCbUsuarioPropertiesCloseUp
     TabOrder = 2
     Text = 'cxCbUsuario'
@@ -94,61 +94,32 @@ object frmPrincipal: TfrmPrincipal
   end
   object cxButton2: TcxButton
     Left = 550
-    Top = 44
+    Top = 47
     Width = 108
     Height = 25
     Caption = 'Lista'
     TabOrder = 3
     Visible = False
   end
-  object DBGrid2: TDBGrid
-    Left = 8
-    Top = 227
-    Width = 650
-    Height = 134
-    DataSource = dmDados.dsRestaurante
-    TabOrder = 4
-    TitleFont.Charset = DEFAULT_CHARSET
-    TitleFont.Color = clWindowText
-    TitleFont.Height = -11
-    TitleFont.Name = 'Tahoma'
-    TitleFont.Style = []
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'CODIGOINTERNO'
-        Title.Caption = 'C'#243'digo'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'DESCRICAO'
-        Title.Caption = 'Descri'#231#227'o'
-        Width = 184
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'OBS'
-        Title.Caption = 'Observa'#231#227'o'
-        Width = 217
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'QTD'
-        Title.Caption = 'Qtd.'
-        Visible = True
-      end>
-  end
   object TimeMonitor: TTimer
     OnTimer = TimeMonitorTimer
     Left = 240
-    Top = 5
+    Top = 8
   end
-  object TimeCozinha: TTimer
-    OnTimer = TimeCozinhaTimer
-    Left = 240
-    Top = 224
+  object TimerMinimize: TTimer
+    Interval = 500
+    OnTimer = TimerMinimizeTimer
+    Left = 328
+    Top = 8
+  end
+  object ApplicationEvents1: TApplicationEvents
+    OnMinimize = ApplicationEvents1Minimize
+    Left = 464
+    Top = 184
+  end
+  object TrayIcon1: TTrayIcon
+    OnDblClick = TrayIcon1DblClick
+    Left = 544
+    Top = 192
   end
 end

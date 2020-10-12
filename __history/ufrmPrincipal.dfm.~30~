@@ -3,7 +3,7 @@ object frmPrincipal: TfrmPrincipal
   Top = 0
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'Monitor de Impressora'
-  ClientHeight = 365
+  ClientHeight = 413
   ClientWidth = 666
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -36,7 +36,7 @@ object frmPrincipal: TfrmPrincipal
     Width = 108
     Height = 25
     Caption = 'Configura'#231#227'o'
-    TabOrder = 1
+    TabOrder = 0
     OnClick = cxButton1Click
   end
   object DBGrid1: TDBGrid
@@ -45,7 +45,7 @@ object frmPrincipal: TfrmPrincipal
     Width = 650
     Height = 134
     DataSource = dmDados.dsNota
-    TabOrder = 0
+    TabOrder = 1
     TitleFont.Charset = DEFAULT_CHARSET
     TitleFont.Color = clWindowText
     TitleFont.Height = -11
@@ -103,7 +103,7 @@ object frmPrincipal: TfrmPrincipal
   end
   object DBGrid2: TDBGrid
     Left = 8
-    Top = 227
+    Top = 271
     Width = 650
     Height = 134
     DataSource = dmDados.dsRestaurante
@@ -113,42 +113,26 @@ object frmPrincipal: TfrmPrincipal
     TitleFont.Height = -11
     TitleFont.Name = 'Tahoma'
     TitleFont.Style = []
-    Columns = <
-      item
-        Expanded = False
-        FieldName = 'CODIGOINTERNO'
-        Title.Caption = 'C'#243'digo'
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'DESCRICAO'
-        Title.Caption = 'Descri'#231#227'o'
-        Width = 184
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'OBS'
-        Title.Caption = 'Observa'#231#227'o'
-        Width = 217
-        Visible = True
-      end
-      item
-        Expanded = False
-        FieldName = 'QTD'
-        Title.Caption = 'Qtd.'
-        Visible = True
-      end>
   end
   object TimeMonitor: TTimer
     OnTimer = TimeMonitorTimer
     Left = 240
     Top = 5
   end
-  object TimeCozinha: TTimer
-    OnTimer = TimeCozinhaTimer
-    Left = 240
-    Top = 224
+  object TimerMinimize: TTimer
+    Interval = 500
+    OnTimer = TimerMinimizeTimer
+    Left = 328
+    Top = 5
+  end
+  object ApplicationEvents1: TApplicationEvents
+    OnMinimize = ApplicationEvents1Minimize
+    Left = 464
+    Top = 181
+  end
+  object TrayIcon1: TTrayIcon
+    OnDblClick = TrayIcon1DblClick
+    Left = 544
+    Top = 189
   end
 end

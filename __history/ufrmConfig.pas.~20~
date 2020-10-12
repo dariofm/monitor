@@ -9,7 +9,13 @@ uses
   dxSkinsDefaultPainters, Vcl.Menus, Vcl.StdCtrls, Vcl.Samples.Spin, cxButtons,
   cxTextEdit, cxMaskEdit, cxDropDownEdit, dxSkinscxPCPainter,
   cxPCdxBarPopupMenu, Vcl.ExtCtrls, cxPC, frxClass, frxDBSet, cxDBEdit, Data.DB,
-  frxDesgn;
+  frxDesgn, cxSpinEdit;
+type
+  TCarregaEmitente = Class(TThread)
+  protected
+    procedure Execute; override;
+
+  End;
 
 type
   TfrmConfig = class(TForm)
@@ -19,10 +25,8 @@ type
     cxTabSheet2: TcxTabSheet;
     Label4: TLabel;
     Label1: TLabel;
-    Label2: TLabel;
     cxBoxImpressora: TcxComboBox;
     SpinTempo: TSpinEdit;
-    SpinEdit1: TSpinEdit;
     cxButton2: TcxButton;
     Shape1: TShape;
     frxDBDatasetCupom: TfrxDBDataset;
@@ -48,9 +52,22 @@ type
     cxButton3: TcxButton;
     TimerAtualizaCadastro: TTimer;
     frxDesigner1: TfrxDesigner;
+    DataSource2: TDataSource;
+    lblsStatus: TLabel;
+    DataSource3: TDataSource;
+    cxCbConfirmImp: TcxComboBox;
+    Label14: TLabel;
+    cxButton4: TcxButton;
+    Label15: TLabel;
+    cxComboBox1: TcxComboBox;
+    Label2: TLabel;
+    cxComboBox2: TcxComboBox;
+    Label13: TLabel;
     procedure cxButton1Click(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure cxButton3Click(Sender: TObject);
+    procedure cxButton4Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -75,14 +92,31 @@ begin
   try
     // Grava os dados no arquivo "Config.ini"
     ArqINI.WriteString('Parametro', 'Intervalo', SpinTempo.Text);
+    //ArqINI.WriteString('Parametro', 'IntervaloErp', SpinErp.Text);
     ArqINI.WriteString('Parametro', 'Impressora', cxBoxImpressora.Text);
+    ArqINI.WriteString('Parametro', 'AutoImp', cxCbConfirmImp.Text);
   finally
     // Liberar a referência do arquivo da memória
     ArqINI.Free;
   end;
   // Apresenta a mensagem
 
+
+  if dmDados.tblEmitente.State in [dsEdit] then
+  begin
+    dmDados.tblEmitente.Post;
+  end;
+
+  if dmDados.tblParam.State in [dsEdit] then
+  begin
+    dmDados.tblParam.Post;
+  end;
+
+
 frmPrincipal.TimeMonitor.Interval := TRUNC(frmConfig.SpinTempo.Value * 1000);
+
+close;
+
 end;
 
 procedure TfrmConfig.cxButton2Click(Sender: TObject);
@@ -93,13 +127,42 @@ begin
 end;
 
 procedure TfrmConfig.cxButton3Click(Sender: TObject);
+var
+  ThreadGravar:TCarregaEmitente;
 begin
 
-  WinExec('C:\Kimmera Monitor\App\dados.exe',0);
 
-  TimerAtualizaCadastro.Enabled := true;
-  dmDados.tblEmitente.Refresh;
-  TimerAtualizaCadastro.Enabled := false;
+  ThreadGravar := TCarregaEmitente.Create(true);
+  ThreadGravar.FreeOnTerminate := True;
+  ThreadGravar.Resume;
+
+end;
+
+procedure TfrmConfig.cxButton4Click(Sender: TObject);
+begin
+  WinExec('C:\Kimmera Monitor\install.bat',1);
+end;
+
+procedure TfrmConfig.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+    frmprincipal.TimeMonitor.Enabled := true;
+end;
+
+{ TCarregaEmitente }
+
+
+
+{ TCarregaEmitente }
+
+procedure TCarregaEmitente.Execute;
+begin
+  Priority := tpLower;
+
+    WinExec('C:\Kimmera Monitor\App\dados.exe',0);
+    ShowMessage('Para que as configurações tenham efeitos o sistema precisa ser reiniciado');
+
+
+  inherited;
 
 end;
 
