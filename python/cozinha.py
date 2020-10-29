@@ -41,11 +41,12 @@ while ativo == True:
         emissao  ="'"+trataData(i["DataHora"])+"'"
         codigoInterno = "'"+i["Codigo"]+"'" 
         descricao = "'"+i["Descricao"]+"'"    
-        try:
-            obs = "'"+i["Observacoes"][0]+"'"
-        except:
-            obs = "'"+''+"'"
-            
+        obsA =""
+        obs = ""
+        for x in i["Observacoes"]:
+            obsA = obsA +x+', '
+
+        obs = "'"+obsA+"'"
         unidade = "'"+i["Unidade"]+"'"
         quantidade = i["Quantidade"]
         valorUnit = i["ValorUnitario"]
