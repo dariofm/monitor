@@ -7,7 +7,7 @@ import firebirdsql
 import configparser
 from funcoes import proximoNumero
 from funcoes import trataData
-
+from bson import ObjectId
 
 
 config = configparser.RawConfigParser()
@@ -30,9 +30,11 @@ while ativo == True:
     setvalue = {}
     conta = 0
     mesa = database["ItensMesaConta"]
-
-    for i in mesa.find({"Situacao":2,"Impresso":False}):
-        
+    #for i in mesa.find({"Situacao":2,"Impresso":True}):
+    for i in mesa.find(
+        {"Situacao":2,
+        "Impresso":False,
+        "ImpressoraReferencia":{"$ne": ObjectId("000000000000000000000000")}}):
         conta = i["NumeroMesaConta"]
         impresso = i["Impresso"]
         cancelado = i["Cancelado"]
@@ -51,8 +53,6 @@ while ativo == True:
         delivery = i["Delivery"]
         idCodigo = proximoNumero('GEN_RESTAURANTE_ID')
         mov_ref = i["_id"]
-        print(i["Descricao"])
-        
         query = {"Situacao":2,"NumeroMesaConta":conta,"_id":mov_ref} 
         setvalue = {"$set":{"Impresso":True}}
         mesa.update_many(query,setvalue)

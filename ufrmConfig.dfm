@@ -14,6 +14,7 @@ object frmConfig: TfrmConfig
   OldCreateOrder = False
   Position = poDesktopCenter
   OnClose = FormClose
+  OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
   object Shape1: TShape
@@ -49,7 +50,6 @@ object frmConfig: TfrmConfig
     object cxTabSheet1: TcxTabSheet
       Caption = 'Monitor'
       ImageIndex = 0
-      ExplicitHeight = 234
       object Label4: TLabel
         Left = 8
         Top = 8
@@ -66,8 +66,8 @@ object frmConfig: TfrmConfig
         Transparent = True
       end
       object Label14: TLabel
-        Left = 8
-        Top = 156
+        Left = 216
+        Top = 8
         Width = 153
         Height = 13
         Caption = 'Pedir confirma'#231#227'o de Impress'#227'o'
@@ -87,7 +87,7 @@ object frmConfig: TfrmConfig
         ParentFont = False
       end
       object Label2: TLabel
-        Left = 216
+        Left = 496
         Top = 8
         Width = 92
         Height = 13
@@ -100,6 +100,14 @@ object frmConfig: TfrmConfig
         Width = 60
         Height = 13
         Caption = 'Restaurante'
+      end
+      object Label16: TLabel
+        Left = 216
+        Top = 54
+        Width = 153
+        Height = 13
+        Caption = 'Pedir confirma'#231#227'o de Impress'#227'o'
+        Transparent = True
       end
       object cxBoxImpressora: TcxComboBox
         Left = 8
@@ -128,8 +136,8 @@ object frmConfig: TfrmConfig
         OnClick = cxButton2Click
       end
       object cxCbConfirmImp: TcxComboBox
-        Left = 8
-        Top = 175
+        Left = 216
+        Top = 27
         Properties.DropDownListStyle = lsEditFixedList
         Properties.Items.Strings = (
           'Sim'
@@ -154,11 +162,21 @@ object frmConfig: TfrmConfig
         Text = 'cxBoxImpressoraRestaurante'
         Width = 202
       end
+      object cxCbConfirmaImpCoz: TcxComboBox
+        Left = 216
+        Top = 73
+        Properties.DropDownListStyle = lsEditFixedList
+        Properties.Items.Strings = (
+          'Sim'
+          'N'#227'o')
+        TabOrder = 6
+        Text = 'Sim'
+        Width = 121
+      end
     end
     object cxTabSheet2: TcxTabSheet
       Caption = 'Dados ERP'
       ImageIndex = 1
-      ExplicitHeight = 233
       object Label3: TLabel
         Left = 8
         Top = 13
@@ -322,7 +340,7 @@ object frmConfig: TfrmConfig
     end
   end
   object cxComboBox1: TcxComboBox
-    Left = 216
+    Left = 480
     Top = 51
     TabOrder = 2
     Text = 'NotaFiscalManual'

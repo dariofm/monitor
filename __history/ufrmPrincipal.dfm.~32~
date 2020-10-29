@@ -31,20 +31,6 @@ object frmPrincipal: TfrmPrincipal
     Height = 13
     Caption = 'Status: '
   end
-  object Label1: TLabel
-    Left = 8
-    Top = 215
-    Width = 38
-    Height = 13
-    Caption = 'Cozinha'
-  end
-  object Label2: TLabel
-    Left = 8
-    Top = 70
-    Width = 60
-    Height = 13
-    Caption = 'Nota Manual'
-  end
   object cxButton1: TcxButton
     Left = 550
     Top = 13
@@ -56,9 +42,9 @@ object frmPrincipal: TfrmPrincipal
   end
   object DBGrid1: TDBGrid
     Left = 8
-    Top = 89
+    Top = 75
     Width = 650
-    Height = 120
+    Height = 134
     DataSource = dmDados.dsNota
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET
@@ -118,9 +104,9 @@ object frmPrincipal: TfrmPrincipal
   end
   object DBGrid2: TDBGrid
     Left = 8
-    Top = 234
+    Top = 227
     Width = 650
-    Height = 120
+    Height = 134
     DataSource = dmDados.dsRestaurante
     TabOrder = 4
     TitleFont.Charset = DEFAULT_CHARSET
@@ -133,7 +119,6 @@ object frmPrincipal: TfrmPrincipal
         Expanded = False
         FieldName = 'CODIGOINTERNO'
         Title.Caption = 'C'#243'digo'
-        Width = 62
         Visible = True
       end
       item

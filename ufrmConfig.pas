@@ -64,11 +64,14 @@ type
     cxBoxImpressoraRestaurante: TcxComboBox;
     Label13: TLabel;
     frxDBDatasetCozinh: TfrxDBDataset;
+    cxCbConfirmaImpCoz: TcxComboBox;
+    Label16: TLabel;
     procedure cxButton1Click(Sender: TObject);
     procedure cxButton2Click(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure cxButton3Click(Sender: TObject);
     procedure cxButton4Click(Sender: TObject);
+    procedure FormShow(Sender: TObject);
   private
     { Private declarations }
   public
@@ -97,6 +100,7 @@ begin
     ArqINI.WriteString('Parametro', 'Impressora1', cxBoxImpressora.Text);
     ArqINI.WriteString('Parametro', 'Impressora2', cxBoxImpressoraRestaurante.Text);
     ArqINI.WriteString('Parametro', 'AutoImp', cxCbConfirmImp.Text);
+    ArqINI.WriteString('Parametro', 'AutoImpCozinha', cxCbConfirmaImpCoz.Text);
   finally
     // Liberar a referência do arquivo da memória
     ArqINI.Free;
@@ -148,6 +152,12 @@ end;
 procedure TfrmConfig.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
     frmprincipal.TimeMonitor.Enabled := true;
+end;
+
+procedure TfrmConfig.FormShow(Sender: TObject);
+begin
+  dmDados.tblEmitente.Open;
+  dmDados.tblEmitente.Edit;
 end;
 
 { TCarregaEmitente }

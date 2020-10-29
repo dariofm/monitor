@@ -40,7 +40,8 @@ def retornaProdutos(nota_num):
     produtos = []
 
     iNumero = -1
-    for i in movimento.find({"Numero":nota_num}):
+    for i in movimento.find({"Numero":nota_num,"_t.3":tipoDoc}):
+        print(i)
         try:
             for item in i["ItensBase"]:
                 iNumero = iNumero + 1
@@ -62,6 +63,7 @@ while ativo == True:
 
     movimento = database["Movimentacoes"]
     for i in movimento.find(query,collection).sort("Numero",-1).limit(1):
+        
         try:
             ultimo_numero = i["Numero"]
             emissao = "'"+trataData(i["DataHoraEmissao"])+"'"
@@ -91,6 +93,7 @@ while ativo == True:
         item = 0
         
         for i in retornaProdutos(ultimo_numero):
+            
             item = item + 1
             idCodigo = proximoNumero('GEN_NOTA_MANUAL_ID')
             codigoInterno = i[0]
@@ -98,7 +101,11 @@ while ativo == True:
             unidade = "'"+i[2]+"'"
             quantidade = i[3]
             valor_unitario = i[4]
+            print('--------------------------------------------------')
+            print(i)
+            print('--------------------------------------------------')
             total = i[3] * i[4]
+            
             canc = i[5]
             impresso = 0
             f = open('C:\\Kimmera Monitor\\log.txt', 'w')

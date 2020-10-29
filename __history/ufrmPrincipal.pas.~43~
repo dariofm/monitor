@@ -172,7 +172,7 @@ begin
       TimeCozinha.Enabled := false;
       if Application.MessageBox('Imprimir Pedido?','Atenção',MB_ICONQUESTION + MB_YESNO) = 6 then
       begin
-        dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressoraRestaurante.Text;
+        dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressora.Text;
         dmDados.frxReportCupom.PrintOptions.ShowDialog:= false;
         dmDados.frxReportCupom.PrepareReport;
         dmDados.frxReportCupom.Print;
@@ -180,7 +180,7 @@ begin
     end;
       if frmConfig.cxCbConfirmaImpCoz.Text = 'Não' then
       begin
-        dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressoraRestaurante.Text;
+        dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressora.Text;
         dmDados.frxReportCupom.PrintOptions.ShowDialog:= false;
         dmDados.frxReportCupom.PrepareReport;
         dmDados.frxReportCupom.Print;

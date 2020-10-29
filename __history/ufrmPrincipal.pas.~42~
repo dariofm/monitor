@@ -21,8 +21,6 @@ type
     cxButton2: TcxButton;
     DBGrid2: TDBGrid;
     TimeCozinha: TTimer;
-    Label1: TLabel;
-    Label2: TLabel;
     procedure TimeMonitorTimer(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure cxButton1Click(Sender: TObject);
@@ -117,8 +115,6 @@ begin
   TimeCozinha.Interval :=  TRUNC(ArquivoConfig.ReadInteger('Parametro', 'Intervalo', 0)*1000);
   frmConfig.SpinTempo.Value := ArquivoConfig.ReadInteger('Parametro', 'Intervalo', 0);
   frmConfig.cxCbConfirmImp.Text := ArquivoConfig.ReadString('Parametro', 'AutoImp', '');
-  frmConfig.cxCbConfirmaImpCoz.Text := ArquivoConfig.ReadString('Parametro', 'AutoImpCozinha', '');
-
   try
    frmConfig.cxBoxImpressora.Text :=  ArquivoConfig.ReadString('Parametro', 'Impressora1', '');
    frmConfig.cxBoxImpressoraRestaurante.Text :=  ArquivoConfig.ReadString('Parametro', 'Impressora2', '');
@@ -167,20 +163,20 @@ begin
     dmDados.frxReportCupom.Variables['hora']               := QuotedStr(TimeToStr(time));
     dmDados.frxReportCupom.Variables['operador']           := QuotedStr(cxCbUsuario.Text);
 
-    if frmConfig.cxCbConfirmaImpCoz.Text = 'Sim' then
+    if frmConfig.cxCbConfirmImp.Text = 'Sim' then
     begin
       TimeCozinha.Enabled := false;
       if Application.MessageBox('Imprimir Pedido?','Atenção',MB_ICONQUESTION + MB_YESNO) = 6 then
       begin
-        dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressoraRestaurante.Text;
+        dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressora.Text;
         dmDados.frxReportCupom.PrintOptions.ShowDialog:= false;
         dmDados.frxReportCupom.PrepareReport;
         dmDados.frxReportCupom.Print;
       end;
     end;
-      if frmConfig.cxCbConfirmaImpCoz.Text = 'Não' then
+      if frmConfig.cxCbConfirmImp.Text = 'Não' then
       begin
-        dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressoraRestaurante.Text;
+        dmDados.frxReportCupom.PrintOptions.Printer := frmConfig.cxBoxImpressora.Text;
         dmDados.frxReportCupom.PrintOptions.ShowDialog:= false;
         dmDados.frxReportCupom.PrepareReport;
         dmDados.frxReportCupom.Print;
